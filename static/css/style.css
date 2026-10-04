@@ -44,6 +44,7 @@ body {
 .logo-emoji { font-size: 1.8rem; }
 .main-nav { display: flex; gap: 4px; flex-wrap: wrap; }
 @media (max-width: 640px) {
+  .site-header { position: static; }
   .header-inner { padding: 8px 12px; }
   .logo { font-size: 1.2rem; }
   .logo-emoji { font-size: 1.4rem; }

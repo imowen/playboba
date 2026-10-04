@@ -99,8 +99,20 @@ document.addEventListener('DOMContentLoaded', () => {
     anim = null;
     const spawned = randomTile();
     spawnPop = spawned ? { r: spawned[0], c: spawned[1], start: performance.now() } : null;
-    draw();
+    drawPop();
     if (!canMove()) endGame();
+  }
+
+  // Short rAF loop so the spawn pop actually plays out instead of
+  // freezing at its first (tiny) frame until the next move redraws.
+  function drawPop() {
+    draw();
+    if (spawnPop && performance.now() - spawnPop.start < 160) {
+      requestAnimationFrame(drawPop);
+    } else {
+      spawnPop = null;
+      draw();
+    }
   }
 
   let spawnPop = null;

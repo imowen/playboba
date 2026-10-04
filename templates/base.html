@@ -14,18 +14,18 @@
 <body>
 <header class="site-header">
   <div class="header-inner">
-    <a href="{{ site.base_path }}/" class="logo"><span class="logo-emoji">🧋</span> <span class="logo-text">PlayBoba</span></a>
+  <a href="{{ site.base_path }}/" class="logo"><span class="logo-emoji">🧋</span> <span class="logo-text">PlayBoba</span></a>
     <nav class="main-nav">
       <a href="{{ site.base_path }}/">Home</a>
       {% for cat in categories %}<a href="{{ site.base_path }}/category/{{ cat.slug }}/">{{ cat.name }}</a>{% endfor %}
       <a href="{{ site.base_path }}/about/">About</a>
     </nav>
   </div>
-  <!-- AD: header-leaderboard 728x90 -->
-  <div class="ad-slot ad-leaderboard" data-ad-slot="header-leaderboard" data-ad-format="728x90" aria-hidden="true"></div>
 </header>
 
 <main class="content">
+<!-- AD: header-leaderboard 728x90 -->
+<div class="ad-slot ad-leaderboard" data-ad-slot="header-leaderboard" data-ad-format="728x90" aria-hidden="true"></div>
 {% block content %}{% endblock %}
 </main>
 
