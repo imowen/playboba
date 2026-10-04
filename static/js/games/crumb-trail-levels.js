@@ -39,12 +39,13 @@
         T: { color: TEA, hp: 1 },
         P: { color: PEARL, hp: 1 }
       },
-      // Front-first. Tea and pearls are buried at first: grabbing them early
-      // clogs a slot and teaches the outside-in rule.
+      // Front-first. Cream (the exposed cup edge) comes first so the very
+      // first tap is instantly rewarding; tea and pearls get exposed as the
+      // cup is nibbled away, teaching the outside-in rule naturally.
       tray: [
+        { color: CREAM, ants: 2 },
         { color: TEA, ants: 2 },
-        { color: PEARL, ants: 1 },
-        { color: CREAM, ants: 2 }
+        { color: PEARL, ants: 1 }
       ]
     },
     {

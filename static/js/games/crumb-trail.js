@@ -53,6 +53,8 @@ var CSS = [
 '.ct-stats{display:flex;justify-content:center;gap:20px;margin:10px 0;font-size:14px;color:#7a5c38;}',
 '.ct-stats b{color:#5a3d1e;}',
 '.ct-shake{animation:ctshake .3s;}',
+'.ct-toast{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(60,40,15,.9);color:#fff8ea;font-size:13px;line-height:1.4;padding:8px 14px;border-radius:20px;z-index:6;pointer-events:none;opacity:0;transition:opacity .25s;max-width:92%;text-align:center;}',
+'.ct-toast.show{opacity:1;}',
 '@keyframes ctshake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}'
 ].join('\n');
 var styleEl = document.createElement('style');
@@ -64,6 +66,7 @@ container.innerHTML =
     '<canvas class="ct-canvas"></canvas>' +
     '<div class="ct-tray-label">🧺 Tray — tap a <b>glowing</b> box to release its ants</div>' +
     '<div class="ct-tray"></div>' +
+    '<div class="ct-toast"></div>' +
     '<div class="ct-overlay"><div class="ct-card"></div></div>' +
   '</div>';
 
@@ -71,6 +74,14 @@ var wrap = container.querySelector('.ct-wrap');
 var canvas = container.querySelector('.ct-canvas');
 var ctx = canvas.getContext('2d');
 var trayEl = container.querySelector('.ct-tray');
+var toastEl = container.querySelector('.ct-toast');
+var toastTimer = null;
+function toast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2800);
+}
 var overlayEl = container.querySelector('.ct-overlay');
 var cardEl = container.querySelector('.ct-card');
 
@@ -118,6 +129,12 @@ var exposedCache = null, deployedColors = null, slotIdle = [];
 var cell = 32, bw = 0, bh = 0, cssW = 0, cssH = 0, ox = 0;
 var nestY = 0, nestH = 92;
 var slotGeom = [];
+
+/* Ant crawl pacing: slow deliberate trips, but the colony ticks fast enough
+ * that a steady little trail is always on the move. */
+var TRIP_OUT = 1300;   // ms: crawl nest -> crumb
+var TRIP_BITE = 260;   // ms: nibble pause on the cell
+var TRIP_BACK = 1150;  // ms: carry the crumb home
 
 /* ---------------- layout ---------------- */
 function layout() {
@@ -186,6 +203,7 @@ function renderTray() {
 
 function onTrayClick(idx) {
   if (!playing || overlayOpen || idx >= Core.REACHABLE) return;
+  var boxColor = sim.tray[idx] && sim.tray[idx].color;
   var ns = Core.deploy(sim, idx);
   if (!ns) { // nest full
     wrap.classList.remove('ct-shake');
@@ -197,6 +215,11 @@ function onTrayClick(idx) {
   refreshDerived();
   renderTray();
   updateHud();
+  // If the deployed color has nothing exposed yet, say so plainly instead of
+  // leaving the player staring at idle ants.
+  if (boxColor && Core.firstExposedOfColor(parsed, sim.hp, boxColor) < 0) {
+    toast('💤 No exposed blocks of this color yet — nibble the outer edge first!');
+  }
 }
 
 /* ---------------- overlays ---------------- */
@@ -310,7 +333,12 @@ function tick() {
   ticks++;
   bites += r.bites.length;
   var now = performance.now();
+  // One visible ant per slot per tick (the sim may bite several times, but a
+  // steady single-file trail reads as "ants crawling", not teleporting).
+  var seenColor = {};
   r.bites.forEach(function (b) {
+    if (seenColor[b.color]) return;
+    seenColor[b.color] = 1;
     var si = preColors.indexOf(b.color);
     if (si >= 0 && slotGeom[si]) spawnTrip(si, b, now);
   });
@@ -323,42 +351,64 @@ function tick() {
 /* ---------------- animation ---------------- */
 function spawnTrip(si, bite, now) {
   var g = slotGeom[si], c = cellCenter(bite.cell);
-  trips.push({ x0: g.cx, y0: g.cy - 12, x1: c.x, y1: c.y, t0: now, dur: 520, color: bite.color });
-  flashes.push({ x: c.x, y: c.y, t0: now + 200 });
+  var total = TRIP_OUT + TRIP_BITE + TRIP_BACK;
+  // Perpendicular wobble so the crawl weaves instead of lasering straight.
+  var dx = c.x - g.cx, dy = c.y - (g.cy - 12);
+  var len = Math.sqrt(dx * dx + dy * dy) || 1;
+  trips.push({
+    x0: g.cx, y0: g.cy - 12, x1: c.x, y1: c.y,
+    nx: -dy / len, ny: dx / len,
+    wob: 5 + Math.random() * 7,
+    t0: now, total: total, color: bite.color
+  });
+  // Bite flash + crumb particles fire when the ant ARRIVES, not at spawn.
+  var arrive = now + TRIP_OUT;
+  flashes.push({ x: c.x, y: c.y, t0: arrive });
   if (bite.cleared) {
     for (var k = 0; k < 6; k++) {
       var a = Math.random() * Math.PI * 2, sp = 30 + Math.random() * 70;
       particles.push({
         x: c.x, y: c.y,
         vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 25,
-        t0: now + 230, life: 450, color: bite.color
+        t0: arrive + 80, life: 450, color: bite.color
       });
     }
   }
 }
 
+function easeCrawl(q) {
+  return q < 0.5 ? 2 * q * q : 1 - Math.pow(-2 * q + 2, 2) / 2;
+}
+
 function drawAnt(x, y, color, carrying) {
   ctx.fillStyle = '#2e2a26';
-  ctx.beginPath(); ctx.ellipse(x, y, 4, 2.8, 0, 0, 6.3); ctx.fill();
-  ctx.beginPath(); ctx.arc(x + 3.6, y - 1, 1.8, 0, 6.3); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(x, y, 5.2, 3.6, 0, 0, 6.3); ctx.fill();
+  ctx.beginPath(); ctx.arc(x + 4.7, y - 1.2, 2.3, 0, 6.3); ctx.fill();
   if (carrying) {
     ctx.fillStyle = color;
-    ctx.fillRect(x - 6.5, y - 8, 5, 5);
+    ctx.fillRect(x - 8, y - 10.5, 6, 6);
   }
 }
 
 function drawTrips(now) {
   for (var i = 0; i < trips.length; i++) {
-    var t = trips[i], p = (now - t.t0) / t.dur;
-    if (p < 0 || p >= 1) continue;
+    var t = trips[i], el = now - t.t0;
+    if (el < 0 || el >= t.total) continue;
     var x, y, carrying = false;
-    if (p < 0.42) {
-      var q = p / 0.42, e = q * q;
-      x = t.x0 + (t.x1 - t.x0) * e; y = t.y0 + (t.y1 - t.y0) * e;
-    } else if (p < 0.55) { x = t.x1; y = t.y1; }
-    else {
-      var q2 = (p - 0.55) / 0.45, e2 = 1 - (1 - q2) * (1 - q2);
-      x = t.x1 + (t.x0 - t.x1) * e2; y = t.y1 + (t.y0 - t.y1) * e2;
+    if (el < TRIP_OUT) {
+      var q = easeCrawl(el / TRIP_OUT);
+      var w = Math.sin((el / TRIP_OUT) * Math.PI * 6) * t.wob * Math.sin((el / TRIP_OUT) * Math.PI);
+      x = t.x0 + (t.x1 - t.x0) * q + t.nx * w;
+      y = t.y0 + (t.y1 - t.y0) * q + t.ny * w;
+    } else if (el < TRIP_OUT + TRIP_BITE) {
+      x = t.x1; y = t.y1;
+      y += Math.sin((el - TRIP_OUT) / TRIP_BITE * Math.PI * 4) * 1.6; // nibble bob
+    } else {
+      var q2 = easeCrawl((el - TRIP_OUT - TRIP_BITE) / TRIP_BACK);
+      var w2 = Math.sin(((el - TRIP_OUT - TRIP_BITE) / TRIP_BACK) * Math.PI * 6) * t.wob *
+               Math.sin(((el - TRIP_OUT - TRIP_BITE) / TRIP_BACK) * Math.PI);
+      x = t.x1 + (t.x0 - t.x1) * q2 + t.nx * w2;
+      y = t.y1 + (t.y0 - t.y1) * q2 + t.ny * w2;
       carrying = true;
     }
     drawAnt(x, y, t.color, carrying);
@@ -456,7 +506,7 @@ function draw(now) {
 
 function loop(now) {
   requestAnimationFrame(loop);
-  trips = trips.filter(function (t) { return now - t.t0 < t.dur + 50; });
+  trips = trips.filter(function (t) { return now - t.t0 < t.total + 60; });
   particles = particles.filter(function (p) { return now - p.t0 < p.life + 50; });
   flashes = flashes.filter(function (f) { return now - f.t0 < 220; });
   draw(now);
