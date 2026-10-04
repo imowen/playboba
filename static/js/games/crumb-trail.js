@@ -130,11 +130,11 @@ var cell = 32, bw = 0, bh = 0, cssW = 0, cssH = 0, ox = 0;
 var nestY = 0, nestH = 92;
 var slotGeom = [];
 
-/* Ant crawl pacing: slow deliberate trips, but the colony ticks fast enough
- * that a steady little trail is always on the move. */
-var TRIP_OUT = 1300;   // ms: crawl nest -> crumb
-var TRIP_BITE = 260;   // ms: nibble pause on the cell
-var TRIP_BACK = 1150;  // ms: carry the crumb home
+/* Ant crawl pacing: constant crawl SPEED (px/s) like real ants — longer trips
+ * take longer. Small stepping bob + weave so it reads as crawling, and ants
+ * emerge from / burrow into a nest hole instead of popping in and out. */
+var ANT_SPEED = 78;      // px per second, laden slightly slower
+var TRIP_BITE = 420;     // ms: nibble pause on the cell
 
 /* ---------------- layout ---------------- */
 function layout() {
@@ -351,18 +351,23 @@ function tick() {
 /* ---------------- animation ---------------- */
 function spawnTrip(si, bite, now) {
   var g = slotGeom[si], c = cellCenter(bite.cell);
-  var total = TRIP_OUT + TRIP_BITE + TRIP_BACK;
+  var hx = g.cx, hy = g.cy - 12; // nest hole mouth
+  var ddx = c.x - hx, ddy = c.y - hy;
+  var dist = Math.sqrt(ddx * ddx + ddy * ddy);
+  // Constant crawl speed like a real ant: longer trips take longer.
+  var outDur = Math.max(800, dist / ANT_SPEED * 1000);
+  var backDur = Math.max(800, dist / (ANT_SPEED * 0.92) * 1000);
+  var total = outDur + TRIP_BITE + backDur;
   // Perpendicular wobble so the crawl weaves instead of lasering straight.
-  var dx = c.x - g.cx, dy = c.y - (g.cy - 12);
-  var len = Math.sqrt(dx * dx + dy * dy) || 1;
+  var len = dist || 1;
   trips.push({
-    x0: g.cx, y0: g.cy - 12, x1: c.x, y1: c.y,
-    nx: -dy / len, ny: dx / len,
+    x0: hx, y0: hy, x1: c.x, y1: c.y,
+    nx: -ddy / len, ny: ddx / len,
     wob: 5 + Math.random() * 7,
-    t0: now, total: total, color: bite.color
+    t0: now, outDur: outDur, backDur: backDur, total: total, color: bite.color
   });
   // Bite flash + crumb particles fire when the ant ARRIVES, not at spawn.
-  var arrive = now + TRIP_OUT;
+  var arrive = now + outDur;
   flashes.push({ x: c.x, y: c.y, t0: arrive });
   if (bite.cleared) {
     for (var k = 0; k < 6; k++) {
@@ -370,7 +375,7 @@ function spawnTrip(si, bite, now) {
       particles.push({
         x: c.x, y: c.y,
         vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 25,
-        t0: arrive + 80, life: 450, color: bite.color
+        t0: arrive + 100, life: 450, color: bite.color
       });
     }
   }
@@ -380,38 +385,53 @@ function easeCrawl(q) {
   return q < 0.5 ? 2 * q * q : 1 - Math.pow(-2 * q + 2, 2) / 2;
 }
 
-function drawAnt(x, y, color, carrying) {
+function drawAnt(x, y, color, carrying, scale, alpha) {
+  scale = scale || 1;
+  alpha = (alpha === undefined) ? 1 : alpha;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(scale, scale);
+  ctx.globalAlpha = alpha;
   ctx.fillStyle = '#2e2a26';
-  ctx.beginPath(); ctx.ellipse(x, y, 5.2, 3.6, 0, 0, 6.3); ctx.fill();
-  ctx.beginPath(); ctx.arc(x + 4.7, y - 1.2, 2.3, 0, 6.3); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(0, 0, 5.2, 3.6, 0, 0, 6.3); ctx.fill();
+  ctx.beginPath(); ctx.arc(4.7, -1.2, 2.3, 0, 6.3); ctx.fill();
   if (carrying) {
     ctx.fillStyle = color;
-    ctx.fillRect(x - 8, y - 10.5, 6, 6);
+    ctx.fillRect(-8, -11.5, 7, 7); // the grabbed chunk, held overhead
   }
+  ctx.restore();
 }
 
 function drawTrips(now) {
   for (var i = 0; i < trips.length; i++) {
     var t = trips[i], el = now - t.t0;
     if (el < 0 || el >= t.total) continue;
-    var x, y, carrying = false;
-    if (el < TRIP_OUT) {
-      var q = easeCrawl(el / TRIP_OUT);
-      var w = Math.sin((el / TRIP_OUT) * Math.PI * 6) * t.wob * Math.sin((el / TRIP_OUT) * Math.PI);
+    var x, y, carrying = false, scale = 1, alpha = 1;
+    var step = Math.sin(el * 0.045) * 1.4; // little stepping shuffle
+    if (el < t.outDur) {
+      var q = easeCrawl(el / t.outDur);
+      var w = Math.sin(q * Math.PI * 6) * t.wob * Math.sin(q * Math.PI);
       x = t.x0 + (t.x1 - t.x0) * q + t.nx * w;
-      y = t.y0 + (t.y1 - t.y0) * q + t.ny * w;
-    } else if (el < TRIP_OUT + TRIP_BITE) {
-      x = t.x1; y = t.y1;
-      y += Math.sin((el - TRIP_OUT) / TRIP_BITE * Math.PI * 4) * 1.6; // nibble bob
+      y = t.y0 + (t.y1 - t.y0) * q + t.ny * w + step * 0.35;
+      if (el < 240) scale = 0.3 + 0.7 * (el / 240); // climb out of the hole
+    } else if (el < t.outDur + TRIP_BITE) {
+      x = t.x1;
+      y = t.y1 + Math.sin((el - t.outDur) / TRIP_BITE * Math.PI * 4) * 1.6; // nibble
     } else {
-      var q2 = easeCrawl((el - TRIP_OUT - TRIP_BITE) / TRIP_BACK);
-      var w2 = Math.sin(((el - TRIP_OUT - TRIP_BITE) / TRIP_BACK) * Math.PI * 6) * t.wob *
-               Math.sin(((el - TRIP_OUT - TRIP_BITE) / TRIP_BACK) * Math.PI);
+      var e2 = (el - t.outDur - TRIP_BITE) / t.backDur;
+      var q2 = easeCrawl(e2);
+      var w2 = Math.sin(q2 * Math.PI * 6) * t.wob * Math.sin(q2 * Math.PI);
       x = t.x1 + (t.x0 - t.x1) * q2 + t.nx * w2;
-      y = t.y1 + (t.y0 - t.y1) * q2 + t.ny * w2;
+      y = t.y1 + (t.y0 - t.y1) * q2 + t.ny * w2 + step * 0.35;
       carrying = true;
+      var remain = t.total - el;
+      if (remain < 280) { // sink back into the hole
+        var k = Math.max(0, remain / 280);
+        scale = 0.25 + 0.75 * k;
+        alpha = 0.2 + 0.8 * k;
+      }
     }
-    drawAnt(x, y, t.color, carrying);
+    drawAnt(x, y, t.color, carrying, scale, alpha);
   }
 }
 
@@ -447,6 +467,11 @@ function drawNest() {
     var w = cssW / Core.MAX_SLOTS - 12, h = 62;
     var x = g.cx - w / 2, y = nestY + 8;
     var slot = sim.slots[i];
+    // Nest hole mouth: ants climb out of it and burrow back in.
+    ctx.fillStyle = '#3a2a18';
+    ctx.beginPath(); ctx.ellipse(g.cx, g.cy - 12, 10, 7, 0, 0, 6.3); ctx.fill();
+    ctx.fillStyle = '#1f150c';
+    ctx.beginPath(); ctx.ellipse(g.cx, g.cy - 12, 6.5, 4.5, 0, 0, 6.3); ctx.fill();
     if (slot) {
       ctx.fillStyle = hexA(slot.color, 0.30);
       rr(x, y, w, h, 8); ctx.fill();
