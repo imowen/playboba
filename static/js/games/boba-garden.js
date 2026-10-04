@@ -120,6 +120,7 @@ function load() {
 /* ---------------- game state ---------------- */
 var state = null;
 var floaters = [], poofs = [];
+var stageSeen = {}, pops = {}; // plotIdx -> last stage / stage-up bounce t0
 var cell = 64, ox = 0, oy = 12, cssW = 0, cssH = 0, gap = 8;
 
 function layout() {
@@ -338,7 +339,31 @@ function draw(now) {
     var plot = state.plots[i];
     var st = Core.stageOf(plot, now);
     if (st > 0) {
+      // Stage-up celebration: sparkle poof + squash-and-stretch bounce.
+      if ((stageSeen[i] || 0) < st) {
+        pops[i] = now;
+        for (var k = 0; k < 7; k++) poofs.push(newPoof(p.x + cell / 2, p.y + cell / 2 - 6));
+      }
+      stageSeen[i] = st;
+      // Continuous growth: the plant visibly swells from 30% to full size as
+      // progress goes 0 -> 1, anchored at soil level, with a gentle sway.
+      var prog = Core.progressOf(plot, now);
+      var grow = 0.3 + 0.7 * prog;
+      var bounce = 1;
+      if (pops[i] !== undefined) {
+        var bp = (now - pops[i]) / 450;
+        if (bp >= 1) { delete pops[i]; }
+        else { bounce = 1 + 0.5 * Math.sin(bp * Math.PI); }
+      }
+      var ax = p.x + cell / 2, ay = p.y + cell - 8; // soil anchor
+      var sway = Math.sin(now / 850 + i * 1.7) * 0.045;
+      ctx.save();
+      ctx.translate(ax, ay);
+      ctx.scale(grow * bounce, grow * bounce);
+      ctx.rotate(sway);
+      ctx.translate(-ax, -ay);
       drawCrop(p, plot.crop, st, now);
+      ctx.restore();
       if (st === 3) {
         // golden "ready" glow, gently pulsing
         var pulse = 0.55 + 0.25 * Math.sin(now / 350);
@@ -409,7 +434,7 @@ function boot() {
       if (window.confirm('Start over? Your current garden will be erased.')) {
         try { localStorage.removeItem(SAVE_KEY); } catch (e) {}
         state = Core.newGame(Date.now());
-        floaters = []; poofs = [];
+        floaters = []; poofs = []; stageSeen = {}; pops = {};
         layout(); updateHud(); save();
         toast('🌱 Fresh garden! Tap a plot to plant.');
       }

@@ -109,10 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
             (CELL / 2 - 3) * pulse, 0, 7);
     ctx.fill();
     // snake, interpolated between ticks for buttery movement
+    const prev = prevSnake || snake; // before the first tick there is nothing to interpolate from
     const alpha = prevSnake ? Math.min(1, ((now || 0) - lastTick) / tickMs) : 1;
     snake.forEach((s, i) => {
-      const pi = i === 0 ? 0 : Math.min(i - 1, prevSnake.length - 1);
-      const p = prevSnake ? prevSnake[pi] : s;
+      const p = prev[Math.min(i, prev.length - 1)];
       const cx = (p.x + (s.x - p.x) * alpha) * CELL;
       const cy = (p.y + (s.y - p.y) * alpha) * CELL;
       ctx.fillStyle = i === 0 ? '#7ed957' : '#4caf50';
