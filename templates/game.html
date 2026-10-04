@@ -96,6 +96,10 @@
 {% endblock %}
 
 {% block scripts %}
+{% if game.js_extra %}
+{% for extra in game.js_extra %}<script src="{{ site.base_path }}/static/js/games/{{ extra }}"></script>
+{% endfor %}
+{% endif %}
 <script src="{{ site.base_path }}/static/js/games/{{ game.js }}"></script>
 <script>
 // bring the game into view when starting (mobile: title/tagline push it down)

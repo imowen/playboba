@@ -42,10 +42,18 @@ cd dist && python3 -m http.server 8000   # preview at http://localhost:8000
    - start/restart via `#game-start-btn` and `#game-restart-btn`
    - show game over via `#game-over` (remove `.hidden`) and set `#final-score`
    - support keyboard **and** touch controls
-2. Add one entry to the `games` array in `games.json` (slug, title, category, emoji, description, how_to_play, controls, tips[3], faq[4], js filename, tags). Write real, original copy — 300+ words of description/how-to/tips combined — it matters for SEO and AdSense approval.
+2. Add one entry to the `games` array in `games.json` (slug, title, category, emoji, description, how_to_play, controls, tips[3], faq[4], js filename, tags). Write real, original copy — 300+ words of description/how-to/tips combined — it matters for SEO and AdSense approval. If the game needs extra scripts loaded before its main file (shared logic, level data), list them in `js_extra` (e.g. Crumb Trail's `["crumb-trail-levels.js", "crumb-trail-core.js"]`).
 3. Run `python3 build.py`.
 
 That's it — the game page, category listing, sitemap, and nav all regenerate automatically.
+
+## Crumb Trail (game 6)
+
+Original ant color-sorting puzzle (same genre as viral "ant moving" games, 100% original assets/levels/text). Core sim lives in `static/js/games/crumb-trail-core.js` (UMD, no DOM) and is shared by the browser game and the Node solver, so solver-verified levels are guaranteed beatable in-game. Levels are ASCII-art + legend in `static/js/games/crumb-trail-levels.js`. Verify with `node scripts/solve.js` (BFS over deploy choices; exits non-zero if any level is unsolvable).
+
+**Note on the tray rule:** the tray is an ordered queue and the player may take any of the 4 front ("glowing") boxes. A strict front-1 rule would leave zero player decisions (single forced action sequence), so the front-4 zone is the intended design — it preserves the "read the tray / don't clog the nest" tension.
+
+Roadmap (out of scope for MVP): locks & keys, spider webs, power-ups, conveyor tray, linked boxes.
 
 ## Deploy to Cloudflare Pages
 
