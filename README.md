@@ -53,6 +53,7 @@ That's it — the game page, category listing, sitemap, and nav all regenerate a
 2. Cloudflare dashboard → Pages → Create project → connect the GitHub repo.
 3. Build settings: framework preset **None**, build command `pip install -r requirements.txt && python3 build.py`, output directory `dist`.
 4. Add custom domain `playboba.com` (and `www`) under the project's Custom domains.
+5. When the site moves to a custom domain at the root, set `site.base_path` to `""` in `games.json` and rebuild. (While hosted at `imowen.github.io/playboba/`, keep it as `"/playboba"` so CSS, JS, and internal links resolve.)
 
 ## Monetization
 

@@ -30,7 +30,7 @@
 
 {% block content %}
 <article class="game-page">
-  <nav class="breadcrumb"><a href="/">Home</a> › <a href="/category/{{ game.category }}/">{{ category_names[game.category] }}</a> › {{ game.title }}</nav>
+  <nav class="breadcrumb"><a href="{{ site.base_path }}/">Home</a> › <a href="{{ site.base_path }}/category/{{ game.category }}/">{{ category_names[game.category] }}</a> › {{ game.title }}</nav>
 
   <h1>{{ game.emoji }} {{ game.title }} Unblocked</h1>
   <p class="game-tagline">Play {{ game.title }} online free — no download, no sign-up.</p>
@@ -87,7 +87,7 @@
       <h3>🎮 More Games</h3>
       <div class="sidebar-games">
         {% for g in games if g.slug != game.slug %}
-        <a class="sidebar-game" href="/game/{{ g.slug }}/"><span>{{ g.emoji }}</span> {{ g.title }}</a>
+        <a class="sidebar-game" href="{{ site.base_path }}/game/{{ g.slug }}/"><span>{{ g.emoji }}</span> {{ g.title }}</a>
         {% endfor %}
       </div>
     </aside>
@@ -96,5 +96,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/static/js/games/{{ game.js }}"></script>
+<script src="{{ site.base_path }}/static/js/games/{{ game.js }}"></script>
 {% endblock %}

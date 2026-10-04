@@ -32,6 +32,13 @@ def main():
     ctx = {"site": site, "categories": categories, "games": games,
            "category_names": category_names}
 
+    # page body_html is data (not re-rendered by Jinja), so rewrite its
+    # absolute links with base_path here. Set base_path to "" when the
+    # site moves to a custom domain at the root.
+    bp = site.get("base_path", "")
+    for p in pages:
+        p["body_html"] = p["body_html"].replace('href="/', f'href="{bp}/')
+
     # fresh dist (keep it out of git via .gitignore)
     if DIST.exists():
         shutil.rmtree(DIST)

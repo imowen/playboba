@@ -15,7 +15,7 @@
 
 <section class="category-pills">
   {% for cat in categories %}
-  <a class="pill" href="/category/{{ cat.slug }}/">{{ cat.emoji }} {{ cat.name }}</a>
+  <a class="pill" href="{{ site.base_path }}/category/{{ cat.slug }}/">{{ cat.emoji }} {{ cat.name }}</a>
   {% endfor %}
 </section>
 
@@ -23,7 +23,7 @@
   <h2>🎮 All Games</h2>
   <div class="game-grid">
     {% for game in games %}
-    <a class="game-card" href="/game/{{ game.slug }}/">
+    <a class="game-card" href="{{ site.base_path }}/game/{{ game.slug }}/">
       <div class="game-card-emoji">{{ game.emoji }}</div>
       <div class="game-card-title">{{ game.title }}</div>
       <div class="game-card-cat">{{ category_names[game.category] }}</div>

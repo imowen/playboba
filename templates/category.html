@@ -12,13 +12,13 @@
 {% endblock %}
 
 {% block content %}
-<nav class="breadcrumb"><a href="/">Home</a> › {{ category.name }}</nav>
+<nav class="breadcrumb"><a href="{{ site.base_path }}/">Home</a> › {{ category.name }}</nav>
 <h1>{{ category.emoji }} {{ category.name }}</h1>
 <p class="category-desc">{{ category.description }}</p>
 
 <div class="game-grid">
   {% for game in games %}
-  <a class="game-card" href="/game/{{ game.slug }}/">
+  <a class="game-card" href="{{ site.base_path }}/game/{{ game.slug }}/">
     <div class="game-card-emoji">{{ game.emoji }}</div>
     <div class="game-card-title">{{ game.title }}</div>
     <div class="game-card-cat">{{ category.name }}</div>
