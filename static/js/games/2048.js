@@ -59,14 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function move(dir) { // 0=left 1=up 2=right 3=down
     if (!playing) return;
+    // CW rotations needed to turn this direction into "slide left":
+    // left=0, up=3 (CCW once), right=2, down=1
+    const rots = [0, 3, 2, 1][dir];
     let g = grid, moved = false, gained = 0;
-    for (let i = 0; i < dir; i++) g = rotateCW(g);
+    for (let i = 0; i < rots; i++) g = rotateCW(g);
     g = g.map(row => {
       const r = slideRow(row);
       moved = moved || r.moved; gained += r.gained;
       return r.row;
     });
-    for (let i = 0; i < (4 - dir) % 4; i++) g = rotateCW(g);
+    for (let i = 0; i < (4 - rots) % 4; i++) g = rotateCW(g);
     if (!moved) return;
     grid = g; score += gained;
     if (!won && grid.flat().some(v => v >= 2048)) { won = true; }
@@ -125,6 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
   canvas.addEventListener('touchstart', e => {
     const t = e.touches[0]; tx = t.clientX; ty = t.clientY;
   }, { passive: true });
+  // stop the page scrolling while swiping on the board
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); }, { passive: false });
   canvas.addEventListener('touchend', e => {
     const t = e.changedTouches[0];
     const dx = t.clientX - tx, dy = t.clientY - ty;
