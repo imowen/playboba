@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category.name }} – Play Free Online | {{ site.name }}{% endblock %}
+{% block meta_description %}Play free {{ category.name | lower }} unblocked online at {{ site.name }}. {{ category.description | truncate(140) }}{% endblock %}
+{% block canonical %}https://{{ site.domain }}/category/{{ category.slug }}/{% endblock %}
+
+{% block og %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ category.name }} – Play Free Online | {{ site.name }}">
+<meta property="og:description" content="Play free {{ category.name | lower }} unblocked online at {{ site.name }}.">
+<meta property="og:url" content="https://{{ site.domain }}/category/{{ category.slug }}/">
+{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb"><a href="/">Home</a> › {{ category.name }}</nav>
+<h1>{{ category.emoji }} {{ category.name }}</h1>
+<p class="category-desc">{{ category.description }}</p>
+
+<div class="game-grid">
+  {% for game in games %}
+  <a class="game-card" href="/game/{{ game.slug }}/">
+    <div class="game-card-emoji">{{ game.emoji }}</div>
+    <div class="game-card-title">{{ game.title }}</div>
+    <div class="game-card-cat">{{ category.name }}</div>
+  </a>
+  {% endfor %}
+</div>
+
+<section class="intro">
+  <h2>Free {{ category.name }} — No Download Needed</h2>
+  <p>Every {{ category.name | lower }} on PlayBoba is free, unblocked, and playable right in your browser. Pick a game above and start playing instantly — on desktop, tablet, or phone.</p>
+</section>
+{% endblock %}

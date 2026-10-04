@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ site.name }}{% endblock %}
+{% block meta_description %}{{ page.description }}{% endblock %}
+{% block canonical %}https://{{ site.domain }}/{{ page.slug }}/{% endblock %}
+
+{% block og %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ page.title }} | {{ site.name }}">
+<meta property="og:description" content="{{ page.description }}">
+<meta property="og:url" content="https://{{ site.domain }}/{{ page.slug }}/">
+{% endblock %}
+
+{% block content %}
+<article class="static-page">
+  <nav class="breadcrumb"><a href="/">Home</a> › {{ page.title }}</nav>
+  <h1>{{ page.body_title }}</h1>
+  <div class="page-body">
+    {{ page.body_html | safe }}
+  </div>
+</article>
+{% endblock %}

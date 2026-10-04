@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}{{ game.title }} Unblocked – Play Online Free | {{ site.name }}{% endblock %}
+{% block meta_description %}Play {{ game.title }} unblocked online free at {{ site.name }}! {{ game.description | truncate(140) }}{% endblock %}
+{% block canonical %}https://{{ site.domain }}/game/{{ game.slug }}/{% endblock %}
+
+{% block og %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ game.title }} Unblocked – Play Online Free | {{ site.name }}">
+<meta property="og:description" content="Play {{ game.title }} unblocked online free at {{ site.name }}! {{ game.description | truncate(140) }}">
+<meta property="og:url" content="https://{{ site.domain }}/game/{{ game.slug }}/">
+{% endblock %}
+
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "{{ game.title }}",
+  "description": "Play {{ game.title }} unblocked online free at {{ site.name }}. {{ game.description }}",
+  "genre": "{{ category_names[game.category] }}",
+  "playMode": "SinglePlayer",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Any",
+  "url": "https://{{ site.domain }}/game/{{ game.slug }}/",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<article class="game-page">
+  <nav class="breadcrumb"><a href="/">Home</a> › <a href="/category/{{ game.category }}/">{{ category_names[game.category] }}</a> › {{ game.title }}</nav>
+
+  <h1>{{ game.emoji }} {{ game.title }} Unblocked</h1>
+  <p class="game-tagline">Play {{ game.title }} online free — no download, no sign-up.</p>
+
+  <div class="game-layout">
+    <div class="game-main">
+      <div class="game-frame">
+        <div class="game-hud">
+          <span id="game-score">Score: 0</span>
+          <button id="game-start-btn" class="btn">▶ Start</button>
+        </div>
+        <div id="game-container"></div>
+        <div id="game-over" class="game-over hidden">
+          <h3>Game Over</h3>
+          <p>Your score: <strong id="final-score">0</strong></p>
+          <button id="game-restart-btn" class="btn">🔄 Play Again</button>
+        </div>
+      </div>
+      <!-- AD: below-game rectangle 336x280 -->
+      <div class="ad-slot ad-rectangle" data-ad-slot="below-game" data-ad-format="336x280" aria-hidden="true"></div>
+
+      <section class="game-about">
+        <h2>About {{ game.title }}</h2>
+        <p>{{ game.description }}</p>
+      </section>
+
+      <section class="game-howto">
+        <h2>How to Play {{ game.title }}</h2>
+        {% for para in game.how_to_play.split('\n') %}
+        <p>{{ para }}</p>
+        {% endfor %}
+        <h3>Controls</h3>
+        <p>{{ game.controls }}</p>
+        <h3>Tips to Win</h3>
+        <ul>
+          {% for tip in game.tips %}<li>{{ tip }}</li>{% endfor %}
+        </ul>
+      </section>
+
+      <section class="game-faq">
+        <h2>{{ game.title }} FAQs</h2>
+        {% for item in game.faq %}
+        <div class="faq-item">
+          <h3>{{ item.q }}</h3>
+          <p>{{ item.a }}</p>
+        </div>
+        {% endfor %}
+      </section>
+    </div>
+
+    <aside class="game-sidebar">
+      <!-- AD: sidebar 300x250 -->
+      <div class="ad-slot ad-sidebar" data-ad-slot="sidebar" data-ad-format="300x250" aria-hidden="true"></div>
+      <h3>🎮 More Games</h3>
+      <div class="sidebar-games">
+        {% for g in games if g.slug != game.slug %}
+        <a class="sidebar-game" href="/game/{{ g.slug }}/"><span>{{ g.emoji }}</span> {{ g.title }}</a>
+        {% endfor %}
+      </div>
+    </aside>
+  </div>
+</article>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/games/{{ game.js }}"></script>
+{% endblock %}

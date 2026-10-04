@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ site.name }} – {{ site.tagline }}{% endblock %}</title>
+<meta name="description" content="{% block meta_description %}{{ site.description }}{% endblock %}">
+<link rel="canonical" href="{% block canonical %}https://{{ site.domain }}/{% endblock %}">
+{% block og %}{% endblock %}
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧋</text></svg>">
+<link rel="stylesheet" href="/static/css/style.css">
+{% block head_extra %}{% endblock %}
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="logo-emoji">🧋</span> <span class="logo-text">PlayBoba</span></a>
+    <nav class="main-nav">
+      <a href="/">Home</a>
+      {% for cat in categories %}<a href="/category/{{ cat.slug }}/">{{ cat.name }}</a>{% endfor %}
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+  <!-- AD: header-leaderboard 728x90 -->
+  <div class="ad-slot ad-leaderboard" data-ad-slot="header-leaderboard" data-ad-format="728x90" aria-hidden="true"></div>
+</header>
+
+<main class="content">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-emoji">🧋</span> <strong>PlayBoba</strong>
+      <p>{{ site.tagline }}. Play unblocked mini-games free in your browser — no downloads, no sign-up.</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+    </nav>
+    <p class="copyright">© 2026 PlayBoba (playboba.com). All games are original recreations. Made with 🧋 and JavaScript.</p>
+  </div>
+</footer>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block og %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ site.name }} – {{ site.tagline }}">
+<meta property="og:description" content="{{ site.description }}">
+<meta property="og:url" content="https://{{ site.domain }}/">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>🧋 PlayBoba — Free Online Games</h1>
+  <p class="hero-sub">Play unblocked mini-games right in your browser. No downloads, no sign-up, no nonsense — just pick a game and play.</p>
+</section>
+
+<section class="category-pills">
+  {% for cat in categories %}
+  <a class="pill" href="/category/{{ cat.slug }}/">{{ cat.emoji }} {{ cat.name }}</a>
+  {% endfor %}
+</section>
+
+<section>
+  <h2>🎮 All Games</h2>
+  <div class="game-grid">
+    {% for game in games %}
+    <a class="game-card" href="/game/{{ game.slug }}/">
+      <div class="game-card-emoji">{{ game.emoji }}</div>
+      <div class="game-card-title">{{ game.title }}</div>
+      <div class="game-card-cat">{{ category_names[game.category] }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="intro">
+  <h2>Why PlayBoba?</h2>
+  <p>PlayBoba is your cozy corner of the internet for free, unblocked mini-games. Every game here runs on plain HTML and JavaScript — that means they load fast, work on any device, and play anywhere a modern browser runs: at school, at work, or on the couch. No installers, no accounts, no paywalls.</p>
+  <p>We rebuild timeless classics from scratch — the number-merging obsession of <strong>2048</strong>, the arcade tension of <strong>Snake</strong> and <strong>Breakout</strong>, the brain-training focus of <strong>Memory Match</strong>, and a <strong>Tic-Tac-Toe</strong> AI that actually fights back. Each game page includes a full how-to-play guide, pro tips, and FAQs so you can go from button-mashing to high-score hunting.</p>
+  <p>New games are added regularly. Bookmark PlayBoba, grab a boba milk tea, and play free online games whenever you need a break. 🧋</p>
+  <p>Built for speed and simplicity, PlayBoba works everywhere: the games are lightweight enough to load in seconds even on slow connections, and touch controls mean every title is fully playable on phones and tablets. Whether you have two minutes between classes or a lazy Sunday afternoon, there's always a quick game waiting. No updates to install, no storage space eaten up — just open, tap, and play.</p>
+</section>
+{% endblock %}

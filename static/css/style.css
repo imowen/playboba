@@ -1,0 +1,213 @@
+/* PlayBoba — boba milk tea theme. Mobile-first, responsive. */
+
+:root {
+  --cream: #fff8ef;        /* warm cream background */
+  --cream-dark: #f7ecd9;
+  --milk-tea: #c68b4e;      /* milk-tea brown */
+  --milk-tea-dark: #8a5a2b;
+  --boba: #2b2118;          /* boba black */
+  --pink: #f4a7c3;          /* strawberry pink */
+  --pink-dark: #e57ba0;
+  --white: #ffffff;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--cream);
+  color: var(--boba);
+  line-height: 1.65;
+}
+
+/* ---------- header ---------- */
+.site-header {
+  background: var(--boba);
+  color: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.logo { text-decoration: none; color: var(--cream); font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.logo-emoji { font-size: 1.8rem; }
+.main-nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.main-nav a {
+  color: var(--cream);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.main-nav a:hover { background: rgba(255,255,255,.15); }
+
+/* ---------- ad slots (placeholders until AdSense) ---------- */
+.ad-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream-dark);
+  border: 2px dashed var(--milk-tea);
+  border-radius: var(--radius);
+  color: var(--milk-tea-dark);
+  font-size: 0.8rem;
+  margin: 16px auto;
+}
+.ad-slot::after { content: "Ad " attr(data-ad-format); }
+.ad-leaderboard { max-width: 728px; height: 90px; }
+.ad-rectangle { max-width: 336px; height: 280px; }
+.ad-sidebar { width: 300px; height: 250px; }
+@media (max-width: 900px) { .ad-sidebar { display: none; } }
+
+/* ---------- layout ---------- */
+.content { max-width: 1080px; margin: 0 auto; padding: 16px; }
+.breadcrumb { font-size: 0.85rem; color: var(--milk-tea-dark); margin-bottom: 8px; }
+.breadcrumb a { color: var(--milk-tea-dark); }
+
+/* ---------- hero / home ---------- */
+.hero { text-align: center; padding: 32px 16px 8px; }
+.hero h1 { font-size: 2rem; margin: 0 0 8px; }
+.hero-sub { font-size: 1.1rem; color: var(--milk-tea-dark); max-width: 640px; margin: 0 auto; }
+.category-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+.pill {
+  background: var(--white);
+  border: 2px solid var(--pink);
+  color: var(--boba);
+  padding: 8px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.pill:hover { background: var(--pink); }
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  margin: 16px 0 32px;
+}
+.game-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px 12px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--boba);
+  box-shadow: 0 2px 8px rgba(43,33,24,.08);
+  transition: transform .15s ease;
+}
+.game-card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(43,33,24,.15); }
+.game-card-emoji { font-size: 3rem; }
+.game-card-title { font-weight: 800; font-size: 1.1rem; margin-top: 8px; }
+.game-card-cat { font-size: 0.8rem; color: var(--milk-tea-dark); }
+
+.intro { background: var(--white); border-radius: var(--radius); padding: 24px; margin: 24px 0; }
+.intro h2 { margin-top: 0; }
+
+/* ---------- game page ---------- */
+.game-layout { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 900px) { .game-layout { grid-template-columns: 1fr 320px; } }
+.game-tagline { color: var(--milk-tea-dark); font-size: 1.05rem; }
+
+.game-frame {
+  background: var(--boba);
+  border-radius: var(--radius);
+  padding: 12px;
+  position: relative;
+  touch-action: none;
+}
+.game-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--cream);
+  padding: 4px 8px 12px;
+  font-weight: 700;
+}
+.btn {
+  background: var(--pink);
+  border: none;
+  color: var(--boba);
+  font-weight: 800;
+  padding: 8px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn:hover { background: var(--pink-dark); }
+#game-container { display: flex; justify-content: center; }
+#game-container canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background: var(--cream);
+  touch-action: none;
+}
+.game-over {
+  position: absolute;
+  inset: 12px;
+  background: rgba(43,33,24,.92);
+  color: var(--cream);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+.game-over.hidden { display: none; }
+.game-over h3 { margin: 0; font-size: 1.8rem; }
+
+.game-about, .game-howto, .game-faq {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 20px 0;
+}
+.game-about h2, .game-howto h2, .game-faq h2 { margin-top: 0; }
+.faq-item { border-top: 1px solid var(--cream-dark); padding: 12px 0; }
+.faq-item h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.faq-item p { margin: 0; }
+
+.game-sidebar h3 { margin-top: 0; }
+.sidebar-games { display: flex; flex-direction: column; gap: 8px; }
+.sidebar-game {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: var(--boba);
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.sidebar-game:hover { background: var(--pink); }
+
+/* ---------- category / static pages ---------- */
+.category-desc { color: var(--milk-tea-dark); max-width: 720px; }
+.static-page { background: var(--white); border-radius: var(--radius); padding: 32px 24px; max-width: 800px; }
+.page-body h2 { margin-top: 1.6em; }
+.page-body ul { padding-left: 1.4em; }
+
+/* ---------- footer ---------- */
+.site-footer { background: var(--boba); color: var(--cream); margin-top: 48px; }
+.footer-inner { max-width: 1080px; margin: 0 auto; padding: 32px 16px; }
+.footer-brand p { color: #d9c9b4; max-width: 480px; }
+.footer-nav { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
+.footer-nav a { color: var(--pink); text-decoration: none; }
+.footer-nav a:hover { text-decoration: underline; }
+.copyright { font-size: 0.85rem; color: #a89880; }
