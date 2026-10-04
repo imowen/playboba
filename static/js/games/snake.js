@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   container.appendChild(canvas);
   const ctx = canvas.getContext('2d');
 
-  let snake, dir, nextDir, food, score, playing, timer;
+  let snake, dir, nextDir, food, score, playing, raf;
+  let prevSnake = null, lastTick = 0, tickMs = 150;
 
   function newGame() {
     snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
@@ -24,8 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     overEl.classList.add('hidden');
     placeFood(); updateScore();
     startBtn.textContent = '⏸ Pause';
-    clearInterval(timer);
-    timer = setInterval(tick, speed());
+    prevSnake = null;
+    tickMs = speed();
+    lastTick = performance.now();
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(loop);
   }
 
   function speed() { return Math.max(70, 150 - score * 2); } // faster as you score
@@ -41,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function tick() {
     dir = nextDir;
+    prevSnake = snake.map(s => ({ x: s.x, y: s.y }));
     const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
     // wall or self collision
     if (head.x < 0 || head.y < 0 || head.x >= COLS || head.y >= ROWS ||
@@ -50,15 +55,22 @@ document.addEventListener('DOMContentLoaded', () => {
     snake.unshift(head);
     if (head.x === food.x && head.y === food.y) {
       score += 10; updateScore(); placeFood();
-      clearInterval(timer); timer = setInterval(tick, speed());
     } else {
       snake.pop();
     }
-    draw();
+    tickMs = speed();
+    lastTick = performance.now();
+  }
+
+  function loop(now) {
+    if (!playing) return;
+    if (now - lastTick >= tickMs) tick();
+    draw(now);
+    raf = requestAnimationFrame(loop);
   }
 
   function endGame() {
-    playing = false; clearInterval(timer);
+    playing = false; cancelAnimationFrame(raf);
     snake = []; // so the Start button begins a fresh game, not a dead one
     finalEl.textContent = score;
     overEl.classList.remove('hidden');
@@ -67,28 +79,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function toggle() {
     if (playing) { // pause
-      playing = false; clearInterval(timer);
+      playing = false; cancelAnimationFrame(raf);
       startBtn.textContent = '▶ Resume';
     } else if (snake && snake.length) { // resume (only if a game is in progress)
       playing = true;
-      timer = setInterval(tick, speed());
+      lastTick = performance.now();
+      raf = requestAnimationFrame(loop);
       startBtn.textContent = '⏸ Pause';
     } else {
       newGame();
     }
   }
 
-  function draw() {
+  function rr(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function draw(now) {
     ctx.fillStyle = '#1d2b1d'; ctx.fillRect(0, 0, W, H);
-    // food (boba pearl 🧋 style: pink circle)
+    // food (boba pearl): gently pulsing pink circle
+    const pulse = 1 + 0.12 * Math.sin((now || 0) / 280);
     ctx.fillStyle = '#f4a7c3';
     ctx.beginPath();
-    ctx.arc(food.x * CELL + CELL / 2, food.y * CELL + CELL / 2, CELL / 2 - 3, 0, 7);
+    ctx.arc(food.x * CELL + CELL / 2, food.y * CELL + CELL / 2,
+            (CELL / 2 - 3) * pulse, 0, 7);
     ctx.fill();
-    // snake
+    // snake, interpolated between ticks for buttery movement
+    const alpha = prevSnake ? Math.min(1, ((now || 0) - lastTick) / tickMs) : 1;
     snake.forEach((s, i) => {
+      const pi = i === 0 ? 0 : Math.min(i - 1, prevSnake.length - 1);
+      const p = prevSnake ? prevSnake[pi] : s;
+      const cx = (p.x + (s.x - p.x) * alpha) * CELL;
+      const cy = (p.y + (s.y - p.y) * alpha) * CELL;
       ctx.fillStyle = i === 0 ? '#7ed957' : '#4caf50';
-      ctx.fillRect(s.x * CELL + 1, s.y * CELL + 1, CELL - 2, CELL - 2);
+      rr(cx + 1.5, cy + 1.5, CELL - 3, CELL - 3, 6); ctx.fill();
+      if (i === 0) { // eyes look along travel direction
+        ctx.fillStyle = '#1d2b1d';
+        const ex = cx + CELL / 2 + dir.x * 5, ey = cy + CELL / 2 + dir.y * 5;
+        const px = -dir.y * 5, py = dir.x * 5;
+        ctx.beginPath(); ctx.arc(ex + px, ey + py, 2.6, 0, 7); ctx.fill();
+        ctx.beginPath(); ctx.arc(ex - px, ey - py, 2.6, 0, 7); ctx.fill();
+      }
     });
   }
 

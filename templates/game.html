@@ -97,4 +97,10 @@
 
 {% block scripts %}
 <script src="{{ site.base_path }}/static/js/games/{{ game.js }}"></script>
+<script>
+// bring the game into view when starting (mobile: title/tagline push it down)
+document.getElementById('game-start-btn').addEventListener('click', () => {
+  document.querySelector('.game-frame').scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+</script>
 {% endblock %}

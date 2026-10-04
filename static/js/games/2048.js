@@ -27,13 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const empties = [];
     for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++)
       if (!grid[r][c]) empties.push([r, c]);
-    if (!empties.length) return;
+    if (!empties.length) return null;
     const [r, c] = empties[Math.floor(Math.random() * empties.length)];
     grid[r][c] = Math.random() < 0.9 ? 2 : 4;
+    return [r, c];
   }
 
   function newGame() {
     grid = emptyGrid(); score = 0; playing = true; won = false;
+    anim = null; spawnPop = null;
     overEl.classList.add('hidden');
     randomTile(); randomTile();
     updateScore(); draw();
@@ -42,40 +44,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateScore() { scoreEl.textContent = 'Score: ' + score; }
 
-  // Slide + merge one row to the left; returns {row, gained, moved}
-  function slideRow(row) {
-    const vals = row.filter(v => v);
-    let gained = 0;
-    for (let i = 0; i < vals.length - 1; i++) {
-      if (vals[i] === vals[i + 1]) { vals[i] *= 2; gained += vals[i]; vals.splice(i + 1, 1); }
+  // cell coordinates in "slide order" for a direction
+  function cellAt(dir, i, j) { // 0=left 1=up 2=right 3=down
+    if (dir === 0) return [i, j];
+    if (dir === 2) return [i, SIZE - 1 - j];
+    if (dir === 1) return [j, i];
+    return [SIZE - 1 - j, i];
+  }
+
+  let anim = null; // {moves:[{fr,fc,tr,tc,v,merged}], start}
+
+  function move(dir) {
+    if (!playing || anim) return;
+    const next = emptyGrid(), moves = [];
+    let moved = false, gained = 0;
+    for (let i = 0; i < SIZE; i++) {
+      const vals = [];
+      for (let j = 0; j < SIZE; j++) {
+        const [r, c] = cellAt(dir, i, j);
+        if (grid[r][c]) vals.push({ v: grid[r][c], r, c });
+      }
+      const out = [];
+      for (let k = 0; k < vals.length; k++) {
+        const [tr, tc] = cellAt(dir, i, out.length);
+        if (k + 1 < vals.length && vals[k].v === vals[k + 1].v) {
+          const nv = vals[k].v * 2;
+          moves.push({ fr: vals[k].r, fc: vals[k].c, tr, tc, v: nv, merged: true });
+          moves.push({ fr: vals[k + 1].r, fc: vals[k + 1].c, tr, tc, v: nv, merged: true });
+          out.push(nv); gained += nv; k++;
+        } else {
+          moves.push({ fr: vals[k].r, fc: vals[k].c, tr, tc, v: vals[k].v, merged: false });
+          out.push(vals[k].v);
+        }
+      }
+      for (let j = 0; j < SIZE; j++) {
+        const [r, c] = cellAt(dir, i, j);
+        next[r][c] = j < out.length ? out[j] : 0;
+      }
     }
-    while (vals.length < SIZE) vals.push(0);
-    return { row: vals, gained, moved: vals.some((v, i) => v !== row[i]) };
-  }
-
-  function rotateCW(g) { // rotate grid 90° clockwise
-    return g[0].map((_, c) => g.map(row => row[c]).reverse());
-  }
-
-  function move(dir) { // 0=left 1=up 2=right 3=down
-    if (!playing) return;
-    // CW rotations needed to turn this direction into "slide left":
-    // left=0, up=3 (CCW once), right=2, down=1
-    const rots = [0, 3, 2, 1][dir];
-    let g = grid, moved = false, gained = 0;
-    for (let i = 0; i < rots; i++) g = rotateCW(g);
-    g = g.map(row => {
-      const r = slideRow(row);
-      moved = moved || r.moved; gained += r.gained;
-      return r.row;
-    });
-    for (let i = 0; i < (4 - rots) % 4; i++) g = rotateCW(g);
+    moved = moves.some(m => m.fr !== m.tr || m.fc !== m.tc);
     if (!moved) return;
-    grid = g; score += gained;
-    if (!won && grid.flat().some(v => v >= 2048)) { won = true; }
-    randomTile(); updateScore(); draw();
+    grid = next; score += gained;
+    if (!won && grid.flat().some(v => v >= 2048)) won = true;
+    updateScore();
+    anim = { moves, start: performance.now() };
+    requestAnimationFrame(drawAnim);
+  }
+
+  function drawAnim(now) {
+    const t = Math.min(1, (now - anim.start) / 130);
+    const e = 1 - (1 - t) * (1 - t); // easeOutQuad
+    drawTiles(anim.moves, e);
+    if (t < 1) { requestAnimationFrame(drawAnim); return; }
+    anim = null;
+    const spawned = randomTile();
+    spawnPop = spawned ? { r: spawned[0], c: spawned[1], start: performance.now() } : null;
+    draw();
     if (!canMove()) endGame();
   }
+
+  let spawnPop = null;
 
   function canMove() {
     for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) {
@@ -92,19 +120,50 @@ document.addEventListener('DOMContentLoaded', () => {
     overEl.classList.remove('hidden');
   }
 
-  function draw() {
+  function tileColor(v) { return v ? (COLORS[v] || '#3c3a32') : 'rgba(238,228,218,.35)'; }
+
+  function drawTileAt(pr, pc, v, scale) {
+    const s = CELL * scale, off = (CELL - s) / 2;
+    const x = GAP + pc * (CELL + GAP) + off, y = GAP + pr * (CELL + GAP) + off;
+    ctx.fillStyle = tileColor(v);
+    roundRect(x, y, s, s, 8); ctx.fill();
+    if (v) {
+      ctx.fillStyle = v <= 4 ? '#776e65' : '#f9f6f2';
+      const fs = (v < 100 ? 44 : v < 1000 ? 38 : 30) * scale;
+      ctx.font = 'bold ' + fs + 'px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(v, x + s / 2, y + s / 2 + 2);
+    }
+  }
+
+  function drawBoard() {
     ctx.fillStyle = '#bbada0';
     ctx.fillRect(0, 0, BOARD, BOARD);
+    for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++)
+      drawTileAt(r, c, 0, 1);
+  }
+
+  function drawTiles(moves, e) {
+    drawBoard();
+    for (const m of moves) {
+      const pr = m.fr + (m.tr - m.fr) * e, pc = m.fc + (m.tc - m.fc) * e;
+      const scale = m.merged ? 1 + 0.18 * Math.sin(Math.PI * e) : 1;
+      drawTileAt(pr, pc, m.v, scale);
+    }
+  }
+
+  function draw() {
+    drawBoard();
+    const now = performance.now();
     for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) {
-      const x = GAP + c * (CELL + GAP), y = GAP + r * (CELL + GAP), v = grid[r][c];
-      ctx.fillStyle = v ? (COLORS[v] || '#3c3a32') : 'rgba(238,228,218,.35)';
-      roundRect(x, y, CELL, CELL, 8); ctx.fill();
-      if (v) {
-        ctx.fillStyle = v <= 4 ? '#776e65' : '#f9f6f2';
-        ctx.font = 'bold ' + (v < 100 ? 44 : v < 1000 ? 38 : 30) + 'px sans-serif';
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText(v, x + CELL / 2, y + CELL / 2 + 2);
+      const v = grid[r][c];
+      if (!v) continue;
+      let scale = 1;
+      if (spawnPop && spawnPop.r === r && spawnPop.c === c) {
+        const t = Math.min(1, (now - spawnPop.start) / 160);
+        scale = 0.4 + 0.6 * t;
       }
+      drawTileAt(r, c, v, scale);
     }
   }
 

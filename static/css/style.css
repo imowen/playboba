@@ -43,6 +43,15 @@ body {
 .logo { text-decoration: none; color: var(--cream); font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
 .logo-emoji { font-size: 1.8rem; }
 .main-nav { display: flex; gap: 4px; flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .header-inner { padding: 8px 12px; }
+  .logo { font-size: 1.2rem; }
+  .logo-emoji { font-size: 1.4rem; }
+  .main-nav a { padding: 6px 9px; font-size: 0.85rem; }
+  .content { padding: 12px; }
+  .game-page h1 { font-size: 1.4rem; }
+  .game-tagline { font-size: 0.95rem; }
+}
 .main-nav a {
   color: var(--cream);
   text-decoration: none;
@@ -58,12 +67,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--cream-dark);
-  border: 2px dashed var(--milk-tea);
+  background: transparent;
+  border: 1px dashed #dcc9ac;
   border-radius: var(--radius);
-  color: var(--milk-tea-dark);
-  font-size: 0.8rem;
-  margin: 16px auto;
+  color: #c3ab84;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  margin: 14px auto;
 }
 .ad-slot::after { content: "Ad " attr(data-ad-format); }
 .ad-leaderboard { max-width: 728px; height: 90px; }
@@ -122,38 +132,57 @@ body {
 .game-tagline { color: var(--milk-tea-dark); font-size: 1.05rem; }
 
 .game-frame {
-  background: var(--boba);
-  border-radius: var(--radius);
-  padding: 12px;
+  background: linear-gradient(160deg, #3a2d1f, var(--boba) 40%);
+  border-radius: 18px;
+  padding: 14px;
   position: relative;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 10px 30px rgba(43,33,24,.25), inset 0 1px 0 rgba(255,255,255,.08);
+  border: 1px solid #4a3a28;
 }
 .game-hud {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--cream);
-  padding: 4px 8px 12px;
+  padding: 2px 6px 12px;
   font-weight: 700;
 }
+#game-score {
+  background: rgba(255,248,239,.12);
+  border: 1px solid rgba(255,248,239,.18);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
 .btn {
-  background: var(--pink);
+  background: linear-gradient(180deg, var(--pink), var(--pink-dark));
   border: none;
   color: var(--boba);
   font-weight: 800;
-  padding: 8px 20px;
+  padding: 9px 22px;
   border-radius: 999px;
   cursor: pointer;
   font-size: 1rem;
+  box-shadow: 0 3px 10px rgba(229,123,160,.4);
+  transition: transform .1s ease, box-shadow .1s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-.btn:hover { background: var(--pink-dark); }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(229,123,160,.5); }
+.btn:active { transform: translateY(1px) scale(.98); }
 #game-container { display: flex; justify-content: center; }
 #game-container canvas {
+  display: block;
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--cream);
   touch-action: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
 }
 .game-over {
   position: absolute;
