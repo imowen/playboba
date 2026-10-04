@@ -1,1 +1,352 @@
-{"categories":[{"description":"Train your brain with PlayBoba's free puzzle games. From the number-merging addiction of 2048 to the concentration challenge of Memory Match, these unblocked puzzle games are perfect for a quick mental workout at school, at work, or on the couch. No downloads required — just pick a game and start thinking.","emoji":"🧩","name":"Puzzle Games","slug":"puzzle"},{"description":"Classic arcade action, free and unblocked. Guide the Snake to grow as long as possible, or smash every brick in Breakout. These fast-paced browser games capture the spirit of the old arcade halls — simple to learn, hard to master, and impossible to put down.","emoji":"🕹️","name":"Arcade Games","slug":"arcade"},{"description":"Timeless classics, playable instantly. Challenge our AI in Tic-Tac-Toe and see if you can outsmart it. These are the games everyone knows and loves — now free, unblocked, and ready to play in your browser with no installation.","emoji":"♟️","name":"Classic Games","slug":"classic"}],"games":[{"category":"puzzle","controls":"Desktop: Arrow keys or WASD to slide tiles. Mobile: swipe up, down, left, or right on the game board.","description":"2048 is the famously addictive number-merging puzzle game. Slide numbered tiles around a 4x4 grid — when two tiles with the same number touch, they merge into one. Your goal is to create the legendary 2048 tile, but the real challenge is seeing how far beyond it you can go. Every move spawns a new tile, so the board fills up fast and every decision matters.","emoji":"🔢","faq":[{"a":"You win by creating a tile numbered 2048. Merge matching tiles (2+2=4, 4+4=8, and so on) while keeping the board from filling up. After winning you can keep playing toward 4096 and beyond.","q":"How do I win at 2048?"},{"a":"Yes. Our 2048 is completely free, unblocked, and runs right in your browser. No download, no account, no payment — just open the page and play.","q":"Is 2048 free to play on PlayBoba?"},{"a":"Absolutely. The game supports touch controls — just swipe in the direction you want the tiles to slide. It works on iOS and Android browsers.","q":"Can I play 2048 on my phone?"},{"a":"The corner strategy: keep your highest tile in one corner, build descending values toward it, and avoid moves that pull big tiles away from that corner. Plan a few moves ahead and don't rush.","q":"What is the best strategy for 2048?"}],"how_to_play":"Use the arrow keys (or swipe on mobile) to slide all tiles in one direction: up, down, left, or right. When two tiles showing the same number collide, they combine into a single tile worth their sum — two 2s become a 4, two 4s become an 8, and so on. After every move, a new tile (a 2 or a 4) appears in a random empty spot, so the grid keeps getting more crowded.\n\nThe game ends when the board is full and no more merges are possible, so planning ahead is everything. The classic strategy is to keep your highest-numbered tile pinned in one corner and build around it — never let a big tile drift into the middle of the board where it gets trapped. Work on merging smaller tiles toward that corner, and think two or three moves ahead before you slide.\n\nReaching 2048 is the official win condition, but skilled players push on to 4096, 8192, and beyond. Your score increases with every merge, so chasing a personal best is half the fun. Take your time — unlike arcade games, 2048 has no timer, so every move can be carefully considered. Play a few rounds and you'll start seeing merge patterns instinctively.","js":"2048.js","slug":"2048","tags":["unblocked","puzzle","numbers","merge","brain"],"tips":["Keep your largest tile locked in one corner (bottom-left works well) and never move it away.","Build a descending chain of tiles toward your corner tile so merges cascade naturally.","Avoid moving upward (or away from your corner) unless you have no other choice — it scatters your big tiles."],"title":"2048"},{"category":"arcade","controls":"Desktop: Arrow keys or WASD to steer. Mobile: swipe in the direction you want to turn. Press Start (or tap) to begin.","description":"Snake is the timeless arcade classic that started on old mobile phones and never left. Guide a hungry snake around the arena, eat the glowing food pellets to grow longer, and avoid crashing into walls or your own tail. It starts slow and relaxing — then the speed ramps up and every turn becomes a life-or-death decision. How long can you survive?","emoji":"🐍","faq":[{"a":"Eat as many pellets as possible without crashing. Manage space by circling the perimeter, keep an escape route open, and stay calm as the speed increases. Longer survival equals more food equals a higher score.","q":"How do you get a high score in Snake?"},{"a":"Yes — free, unblocked, and playable instantly in your browser on any device. No downloads or accounts needed.","q":"Is Snake unblocked and free on PlayBoba?"},{"a":"The game speeds up as your score grows to keep the challenge rising. It's the classic arcade difficulty curve: easy to learn, hard to master.","q":"Why does Snake get faster?"},{"a":"Press Start/Pause or tap the game area to pause and resume. Take a breather whenever you need one — no penalty.","q":"Can I pause Snake?"}],"how_to_play":"Your snake moves forward automatically, and you control its direction with the arrow keys (or swipe on touch screens). Each food pellet you eat makes the snake grow one segment longer and adds to your score. The catch: your tail keeps getting longer, so the arena effectively shrinks around you. Run into a wall or bite your own tail and the run is over.\n\nThe key skill in Snake is space management. Early on, roam freely and grab food wherever it appears. As you grow, start thinking in loops — circle the perimeter to keep the center open, and always leave yourself an escape route before chasing food into a corner. Never trap yourself: if you box your head in with your own body, there's no way out.\n\nSpeed increases as your score climbs, which is where the real tension begins. Short, decisive turns beat long sweeping ones when things get fast. Many players find a rhythm by hugging the walls and spiraling inward, eating food along the way. There is no finish line — the goal is simply to beat your own high score, one pellet at a time. Each run is a fresh puzzle of your own making.","js":"snake.js","slug":"snake","tags":["unblocked","arcade","classic","retro"],"tips":["Circle the edges of the arena to keep the middle open as an escape zone.","Never chase food into a corner unless you're sure you can get back out.","Make short, quick turns instead of wide arcs when the speed picks up."],"title":"Snake"},{"category":"arcade","controls":"Desktop: Left/Right arrow keys or mouse to move the paddle. Space or click to launch the ball. Mobile: drag to move, tap to launch.","description":"Breakout is the legendary brick-breaking arcade game. Slide your paddle along the bottom of the screen, bounce the ball upward, and smash through rows of colorful bricks. Clear every brick to conquer the level — but don't let the ball slip past your paddle, or you lose a life. Simple, fast, and endlessly satisfying.","emoji":"🧱","faq":[{"a":"You start with 3 lives. Each time the ball falls past your paddle you lose one. Lose all three and the game is over — but you can restart instantly and try to beat your score.","q":"How many lives do I get in Breakout?"},{"a":"Yes. Free, unblocked, no download. It runs in any modern browser on desktop and mobile.","q":"Is Breakout free and unblocked on PlayBoba?"},{"a":"The bounce angle depends on where the ball hits your paddle — edge hits send it sideways at sharp angles, center hits bounce it nearly straight up. Use this to aim at remaining bricks.","q":"How do I control the ball's direction?"},{"a":"You advance to the next level with a faster ball and a fresh wall of bricks. Levels keep coming until you run out of lives.","q":"What happens when I clear all the bricks?"}],"how_to_play":"Move the paddle left and right with the arrow keys or your mouse (on mobile, drag your finger). The ball bounces off the paddle, the walls, and the bricks — each brick you hit shatters and scores points. Where the ball strikes the paddle matters: hitting near the edge sends it off at a sharp angle, while the center gives a straighter bounce. Use this to aim.\n\nYou have 3 lives. If the ball falls below the paddle, you lose one. Clear all the bricks to advance to the next level, where the ball moves faster and the patterns get trickier. Higher rows are worth more points, so tunneling the ball up behind the brick wall and letting it bounce around up there is the fastest way to rack up a big score.\n\nThe endgame of each level comes down to the last few bricks — the ball slows to a crawl of single hits, and one careless moment costs a life. Stay patient, keep the paddle centered when in doubt, and watch the ball's angle instead of the bricks. Breakout rewards calm, precise movement over frantic chasing.","js":"breakout.js","slug":"breakout","tags":["unblocked","arcade","brick","paddle","retro"],"tips":["Aim with the paddle edges: edge hits create sharp angles that clear corners fast.","Tunnel through one column to get the ball bouncing behind the wall for massive combos.","When only a few bricks remain, keep the paddle near center and react to the ball, not the bricks."],"title":"Breakout"},{"category":"puzzle","controls":"Desktop: click cards with the mouse. Mobile: tap cards. That's it — no keyboard needed.","description":"Memory Match is the classic concentration card game, rebuilt for the browser. Sixteen cards lie face down — flip two at a time and try to find all eight matching pairs. It sounds easy until the mismatches start piling up. A perfect game for sharpening focus, and a great quick break that actually exercises your brain.","emoji":"🃏","faq":[{"a":"You earn points for each matched pair, with bonuses for finishing in fewer moves and less time. Efficient play — remembering positions instead of guessing — gives the highest scores.","q":"How is Memory Match scored?"},{"a":"It's a classic short-term memory exercise. Tracking card positions trains concentration and recall — and it's a lot more fun than flashcards.","q":"Is Memory Match good for your brain?"},{"a":"Yes, completely free and unblocked on PlayBoba. No download, no account — just flip cards.","q":"Is Memory Match free and unblocked?"},{"a":"Yes. The game is fully touch-friendly — just tap the cards to flip them.","q":"Can I play Memory Match on my phone?"}],"how_to_play":"Click (or tap) any card to flip it over, then flip a second card. If the two cards match, they stay face up and you score. If they don't match, they flip back over after a short moment — so pay attention, because remembering where you saw each symbol is the entire game. Clear all eight pairs to win.\n\nYour score rewards efficiency: fewer moves and less time mean a higher score. Every flip counts, so random guessing is expensive. The winning approach is systematic — flip cards in a pattern (say, left to right, top to bottom) so you always know which positions you've already seen. When you uncover a card, make a mental note of both its symbol and its position.\n\nAs pairs get cleared, the board empties and the remaining cards become easier to track — the hardest part is the opening, when everything is unknown. Try to memorize in chunks: focus on one row at a time rather than the whole board. With practice you'll find yourself clearing the board in fewer and fewer moves. It's a genuine workout for short-term memory, disguised as a relaxing game.","js":"memory.js","slug":"memory-match","tags":["unblocked","puzzle","memory","cards","brain"],"tips":["Flip cards in a fixed pattern (row by row) so you always know what's been revealed.","When you see a card, memorize its position, not just its symbol.","Clear known pairs immediately when you flip their match — don't flip extra cards in between."],"title":"Memory Match"},{"category":"classic","controls":"Desktop: click a square with the mouse. Mobile: tap a square. Press restart to play again.","description":"Tic-Tac-Toe — the timeless game of X's and O's — against a computer opponent that actually thinks. Place your X's on the 3x3 grid and try to get three in a row before the AI does. It looks simple, but the AI blocks, sets traps, and punishes every careless move. Can you outsmart it, or will you settle for the honorable draw?","emoji":"⭕","faq":[{"a":"It's tough — the AI blocks threats and plays strong openings. Perfect play from both sides always draws, so your goal is to play flawlessly and never give the AI an opening. One mistake and it pounces.","q":"Can you actually beat the AI in Tic-Tac-Toe?"},{"a":"The center. It participates in four winning lines (two diagonals, one row, one column) — more than any other square. If the center is taken, a corner is the next best.","q":"What is the best first move in Tic-Tac-Toe?"},{"a":"Yes — free, unblocked, instant play in your browser. No download or sign-up.","q":"Is Tic-Tac-Toe free and unblocked on PlayBoba?"},{"a":"This version is you versus the AI. For two humans, take turns on the same screen — X taps, then O taps — and keep score yourselves.","q":"Can two people play on the same device?"}],"how_to_play":"You play as X and move first; the AI plays O. Click (or tap) any empty square to place your mark, then the AI answers. Get three of your marks in a row — horizontally, vertically, or diagonally — to win. If all nine squares fill with no winner, it's a draw.\n\nAgainst perfect play, Tic-Tac-Toe always ends in a draw — which means your real opponent here is your own mistakes. The fundamentals: take the center square on your first move (it participates in four winning lines, more than any corner or edge). If the AI takes the center, take a corner instead. Always block the AI's immediate threats, but watch for forks — situations where the AI creates two winning threats at once and you can only block one.\n\nOur AI plays a strong game: it takes wins when it sees them, blocks your threats, and prefers center and corners like any good player. Beating it requires flawless play — one missed block and it's over. Most games between careful players end in draws, and there's no shame in that: forcing a draw against a strong AI means you played perfectly. Track your record across rounds and see if you can string together an unbeaten streak.","js":"tictactoe.js","slug":"tic-tac-toe","tags":["unblocked","classic","strategy","ai","2-player"],"tips":["Open in the center — it gives you the most ways to win.","Always block the AI's two-in-a-row before building your own attack.","Watch for forks: if the AI threatens two lines at once, the game is lost — don't let it set one up."],"title":"Tic-Tac-Toe"},{"slug":"crumb-trail","title":"Crumb Trail","category":"puzzle","emoji":"🐜","description":"Crumb Trail is a cozy color-sorting puzzle game starring a hard-working ant colony with a serious boba milk tea obsession. Every level serves up a pixel-art treat — a boba cup, a strawberry, a full milk tea feast — built from tiny colored blocks. Tap the color boxes in your tray to release same-colored ants, then watch them march out, nibble the picture from the outside in, and haul every crumb home. Part puzzle, part ant farm, and weirdly relaxing to watch.","how_to_play":"Your nest has 5 slots, and your tray holds an ordered queue of color boxes. Tap one of the glowing boxes at the front of the tray to deploy its ants into a free slot — each box carries 1 to 3 ants, and more ants means faster munching. Deployed ants automatically bite one exposed block of their own color every tick.\n\nA block is exposed when it sits on the picture's outer edge or touches a block that's already been eaten, so the picture is always nibbled from the outside in. Here's the catch: a slot stays occupied until every last block of its color is gone. Deploy a color whose blocks are still buried and its ants will sit idle, clogging a precious slot. If all 5 slots clog while the tray still holds boxes — or the tray runs dry with blocks left on the board — the colony stalls and the level fails.\n\nSome blocks are extra chewy and need two bites; the number on the block shows bites remaining. Read the tray, deploy the outer colors first, and keep at least one slot breathing. There's no timer, so plan your deploy order like the ant general you are. Clear every block to win the level.","controls":"Mouse: click a glowing tray box to deploy its ants. Touch: tap a glowing tray box. The ants march and munch on their own. Use the Levels button in the game header to switch levels anytime.","tips":["Deploy the outermost color first — ants can only reach blocks on the picture's edge or next to cleared space.","Never deploy a buried color early: its ants idle and the slot stays clogged until surrounding colors are cleared.","Keep one slot free as a safety valve. Five clogged slots with boxes left in the tray means failure."],"faq":[{"q":"How do the ants decide what to eat?","a":"Each deployed ant automatically bites one exposed block of its own color every tick, picking the topmost-leftmost one first. A block is exposed when it's on the picture's outer edge or touches an already-eaten block, so eating always works from the outside in. You control which colors deploy and when — the ants handle the munching."},{"q":"What happens if I deploy the wrong color?","a":"Its ants sit idle and the slot stays occupied until that color's blocks become exposed. One clogged slot is usually recoverable — clear the outer colors and it frees up. But if all 5 slots clog while the tray still has boxes, the colony stalls and you fail. Hit retry and plan a better order."},{"q":"Do I have to take the tray boxes in order?","a":"Not strictly — you can tap any of the glowing boxes at the front of the tray, and the queue advances behind them. Reading the upcoming order and choosing which front box to release is the core skill of the game."},{"q":"Is Crumb Trail free to play?","a":"Yes — free and unblocked, right in your browser with no download and no account. Your completed levels are saved on your device, so you can pick up where you left off."}],"js":"crumb-trail.js","js_extra":["crumb-trail-levels.js","crumb-trail-core.js"],"tags":["unblocked","puzzle","ants","color-sort","brain","sorting"]}],"pages":[{"body_html":"<p><strong>PlayBoba</strong> is a free online game portal serving up fresh mini-games with a side of boba milk tea vibes. Every game on this site plays instantly in your browser — no downloads, no installs, no accounts, no nonsense.</p><p>We started PlayBoba with a simple belief: great games don't need to be complicated. The classics we grew up with — Snake, Breakout, 2048, Tic-Tac-Toe — are still some of the most fun you can have in five minutes. So we rebuilt them from scratch as lightweight, mobile-friendly web games and put them all in one cozy little corner of the internet.</p><p>Everything here is <strong>unblocked-friendly</strong>: the games are plain HTML and JavaScript with no shady plugins, so they run anywhere a modern browser runs — at school, at work (we won't tell), or on the couch. New games are added regularly, and every game page includes how-to-play guides and tips so you can actually get good, not just button-mash.</p><p>PlayBoba is free forever and supported by ads. Grab a boba, pick a game, and play. 🧋</p>","body_title":"About PlayBoba 🧋","description":"Learn what PlayBoba is: a free, unblocked mini-game portal you can play right in your browser.","slug":"about","title":"About PlayBoba"},{"body_html":"<p><em>Last updated: October 2026</em></p><p>PlayBoba (&quot;we&quot;) respects your privacy. This policy explains what information we collect when you visit playboba.com and how we use it.</p><h2>What we collect</h2><p>We collect very little. Our games run entirely in your browser — your scores and game progress never leave your device. We do not require accounts, and we do not ask for your name, email, or any personal details to play.</p><h2>Analytics</h2><p>We may use privacy-friendly analytics to understand aggregate traffic (for example, which games are popular). This data is anonymized and never tied to an individual.</p><h2>Advertising</h2><p>PlayBoba is supported by advertising. Our ad partners may use cookies to show you relevant ads and measure their performance. You can control cookies through your browser settings, and you can opt out of personalized advertising via your ad provider's settings or at <a href=\"https://www.youronlinechoices.com/\" rel=\"nofollow\">youronlinechoices.com</a>.</p><h2>Children</h2><p>Our games are family-friendly, but the site is intended for a general audience. We do not knowingly collect personal information from children under 13.</p><h2>Contact</h2><p>Questions about this policy? Reach us via the <a href=\"/contact/\">contact page</a>.</p>","body_title":"Privacy Policy","description":"PlayBoba privacy policy: what data we collect (very little) and how advertising cookies work.","slug":"privacy-policy","title":"Privacy Policy"},{"body_html":"<p><em>Last updated: October 2026</em></p><p>By using playboba.com you agree to these terms. They're short, we promise.</p><h2>Free personal use</h2><p>All games on PlayBoba are free for personal, non-commercial use. You may play them in your browser as much as you like. Please don't scrape, copy, or re-host our games or site content without permission.</p><h2>No warranties</h2><p>Games are provided &quot;as is&quot;. We do our best to keep everything running smoothly, but we can't guarantee the site will be error-free or uninterrupted.</p><h2>Fair play</h2><p>Don't attempt to disrupt the site or other players' experience — no hacking, no bots hammering our pages. Play fair and have fun.</p><h2>External links</h2><p>We may link to third-party sites (for example, advertisers). We're not responsible for their content or privacy practices.</p><h2>Changes</h2><p>We may update these terms from time to time. Continued use of the site after changes means you accept the new terms.</p><h2>Contact</h2><p>Questions? Use the <a href=\"/contact/\">contact page</a>.</p>","body_title":"Terms of Service","description":"PlayBoba terms of service: the simple rules for using our free online games.","slug":"terms-of-service","title":"Terms of Service"},{"body_html":"<p>Have a game request? Found a bug? Just want to say hi? We'd love to hear from you.</p><p>The fastest way to reach the PlayBoba team is by email: <strong>hello@playboba.com</strong></p><h2>What to include</h2><ul><li><strong>Bug reports:</strong> which game, what device and browser you're using, and what happened.</li><li><strong>Game requests:</strong> tell us the game and why you'd love to see it on PlayBoba.</li><li><strong>Business inquiries:</strong> advertising and partnership proposals are welcome.</li></ul><p>We read every message and do our best to reply within a few days. Thanks for playing! 🧋</p>","body_title":"Contact Us 📬","description":"Contact the PlayBoba team: game requests, bug reports, feedback, and business inquiries.","slug":"contact","title":"Contact Us"}],"site":{"description":"PlayBoba is a free online game portal. Play unblocked mini-games like 2048, Snake, Breakout, Memory Match and Tic-Tac-Toe right in your browser — no downloads, no sign-up.","domain":"playboba.com","name":"PlayBoba","tagline":"Free Online Games","base_path":"/playboba"}}
+{
+  "categories": [
+    {
+      "description": "Train your brain with PlayBoba's free puzzle games. From the number-merging addiction of 2048 to the concentration challenge of Memory Match, these unblocked puzzle games are perfect for a quick mental workout at school, at work, or on the couch. No downloads required — just pick a game and start thinking.",
+      "emoji": "🧩",
+      "name": "Puzzle Games",
+      "slug": "puzzle"
+    },
+    {
+      "description": "Classic arcade action, free and unblocked. Guide the Snake to grow as long as possible, or smash every brick in Breakout. These fast-paced browser games capture the spirit of the old arcade halls — simple to learn, hard to master, and impossible to put down.",
+      "emoji": "🕹️",
+      "name": "Arcade Games",
+      "slug": "arcade"
+    },
+    {
+      "description": "Timeless classics, playable instantly. Challenge our AI in Tic-Tac-Toe and see if you can outsmart it. These are the games everyone knows and loves — now free, unblocked, and ready to play in your browser with no installation.",
+      "emoji": "♟️",
+      "name": "Classic Games",
+      "slug": "classic"
+    }
+  ],
+  "games": [
+    {
+      "category": "puzzle",
+      "controls": "Desktop: Arrow keys or WASD to slide tiles. Mobile: swipe up, down, left, or right on the game board.",
+      "description": "2048 is the famously addictive number-merging puzzle game. Slide numbered tiles around a 4x4 grid — when two tiles with the same number touch, they merge into one. Your goal is to create the legendary 2048 tile, but the real challenge is seeing how far beyond it you can go. Every move spawns a new tile, so the board fills up fast and every decision matters.",
+      "emoji": "🔢",
+      "faq": [
+        {
+          "a": "You win by creating a tile numbered 2048. Merge matching tiles (2+2=4, 4+4=8, and so on) while keeping the board from filling up. After winning you can keep playing toward 4096 and beyond.",
+          "q": "How do I win at 2048?"
+        },
+        {
+          "a": "Yes. Our 2048 is completely free, unblocked, and runs right in your browser. No download, no account, no payment — just open the page and play.",
+          "q": "Is 2048 free to play on PlayBoba?"
+        },
+        {
+          "a": "Absolutely. The game supports touch controls — just swipe in the direction you want the tiles to slide. It works on iOS and Android browsers.",
+          "q": "Can I play 2048 on my phone?"
+        },
+        {
+          "a": "The corner strategy: keep your highest tile in one corner, build descending values toward it, and avoid moves that pull big tiles away from that corner. Plan a few moves ahead and don't rush.",
+          "q": "What is the best strategy for 2048?"
+        }
+      ],
+      "how_to_play": "Use the arrow keys (or swipe on mobile) to slide all tiles in one direction: up, down, left, or right. When two tiles showing the same number collide, they combine into a single tile worth their sum — two 2s become a 4, two 4s become an 8, and so on. After every move, a new tile (a 2 or a 4) appears in a random empty spot, so the grid keeps getting more crowded.\n\nThe game ends when the board is full and no more merges are possible, so planning ahead is everything. The classic strategy is to keep your highest-numbered tile pinned in one corner and build around it — never let a big tile drift into the middle of the board where it gets trapped. Work on merging smaller tiles toward that corner, and think two or three moves ahead before you slide.\n\nReaching 2048 is the official win condition, but skilled players push on to 4096, 8192, and beyond. Your score increases with every merge, so chasing a personal best is half the fun. Take your time — unlike arcade games, 2048 has no timer, so every move can be carefully considered. Play a few rounds and you'll start seeing merge patterns instinctively.",
+      "js": "2048.js",
+      "slug": "2048",
+      "tags": [
+        "unblocked",
+        "puzzle",
+        "numbers",
+        "merge",
+        "brain"
+      ],
+      "tips": [
+        "Keep your largest tile locked in one corner (bottom-left works well) and never move it away.",
+        "Build a descending chain of tiles toward your corner tile so merges cascade naturally.",
+        "Avoid moving upward (or away from your corner) unless you have no other choice — it scatters your big tiles."
+      ],
+      "title": "2048"
+    },
+    {
+      "category": "arcade",
+      "controls": "Desktop: Arrow keys or WASD to steer. Mobile: swipe in the direction you want to turn. Press Start (or tap) to begin.",
+      "description": "Snake is the timeless arcade classic that started on old mobile phones and never left. Guide a hungry snake around the arena, eat the glowing food pellets to grow longer, and avoid crashing into walls or your own tail. It starts slow and relaxing — then the speed ramps up and every turn becomes a life-or-death decision. How long can you survive?",
+      "emoji": "🐍",
+      "faq": [
+        {
+          "a": "Eat as many pellets as possible without crashing. Manage space by circling the perimeter, keep an escape route open, and stay calm as the speed increases. Longer survival equals more food equals a higher score.",
+          "q": "How do you get a high score in Snake?"
+        },
+        {
+          "a": "Yes — free, unblocked, and playable instantly in your browser on any device. No downloads or accounts needed.",
+          "q": "Is Snake unblocked and free on PlayBoba?"
+        },
+        {
+          "a": "The game speeds up as your score grows to keep the challenge rising. It's the classic arcade difficulty curve: easy to learn, hard to master.",
+          "q": "Why does Snake get faster?"
+        },
+        {
+          "a": "Press Start/Pause or tap the game area to pause and resume. Take a breather whenever you need one — no penalty.",
+          "q": "Can I pause Snake?"
+        }
+      ],
+      "how_to_play": "Your snake moves forward automatically, and you control its direction with the arrow keys (or swipe on touch screens). Each food pellet you eat makes the snake grow one segment longer and adds to your score. The catch: your tail keeps getting longer, so the arena effectively shrinks around you. Run into a wall or bite your own tail and the run is over.\n\nThe key skill in Snake is space management. Early on, roam freely and grab food wherever it appears. As you grow, start thinking in loops — circle the perimeter to keep the center open, and always leave yourself an escape route before chasing food into a corner. Never trap yourself: if you box your head in with your own body, there's no way out.\n\nSpeed increases as your score climbs, which is where the real tension begins. Short, decisive turns beat long sweeping ones when things get fast. Many players find a rhythm by hugging the walls and spiraling inward, eating food along the way. There is no finish line — the goal is simply to beat your own high score, one pellet at a time. Each run is a fresh puzzle of your own making.",
+      "js": "snake.js",
+      "slug": "snake",
+      "tags": [
+        "unblocked",
+        "arcade",
+        "classic",
+        "retro"
+      ],
+      "tips": [
+        "Circle the edges of the arena to keep the middle open as an escape zone.",
+        "Never chase food into a corner unless you're sure you can get back out.",
+        "Make short, quick turns instead of wide arcs when the speed picks up."
+      ],
+      "title": "Snake"
+    },
+    {
+      "category": "arcade",
+      "controls": "Desktop: Left/Right arrow keys or mouse to move the paddle. Space or click to launch the ball. Mobile: drag to move, tap to launch.",
+      "description": "Breakout is the legendary brick-breaking arcade game. Slide your paddle along the bottom of the screen, bounce the ball upward, and smash through rows of colorful bricks. Clear every brick to conquer the level — but don't let the ball slip past your paddle, or you lose a life. Simple, fast, and endlessly satisfying.",
+      "emoji": "🧱",
+      "faq": [
+        {
+          "a": "You start with 3 lives. Each time the ball falls past your paddle you lose one. Lose all three and the game is over — but you can restart instantly and try to beat your score.",
+          "q": "How many lives do I get in Breakout?"
+        },
+        {
+          "a": "Yes. Free, unblocked, no download. It runs in any modern browser on desktop and mobile.",
+          "q": "Is Breakout free and unblocked on PlayBoba?"
+        },
+        {
+          "a": "The bounce angle depends on where the ball hits your paddle — edge hits send it sideways at sharp angles, center hits bounce it nearly straight up. Use this to aim at remaining bricks.",
+          "q": "How do I control the ball's direction?"
+        },
+        {
+          "a": "You advance to the next level with a faster ball and a fresh wall of bricks. Levels keep coming until you run out of lives.",
+          "q": "What happens when I clear all the bricks?"
+        }
+      ],
+      "how_to_play": "Move the paddle left and right with the arrow keys or your mouse (on mobile, drag your finger). The ball bounces off the paddle, the walls, and the bricks — each brick you hit shatters and scores points. Where the ball strikes the paddle matters: hitting near the edge sends it off at a sharp angle, while the center gives a straighter bounce. Use this to aim.\n\nYou have 3 lives. If the ball falls below the paddle, you lose one. Clear all the bricks to advance to the next level, where the ball moves faster and the patterns get trickier. Higher rows are worth more points, so tunneling the ball up behind the brick wall and letting it bounce around up there is the fastest way to rack up a big score.\n\nThe endgame of each level comes down to the last few bricks — the ball slows to a crawl of single hits, and one careless moment costs a life. Stay patient, keep the paddle centered when in doubt, and watch the ball's angle instead of the bricks. Breakout rewards calm, precise movement over frantic chasing.",
+      "js": "breakout.js",
+      "slug": "breakout",
+      "tags": [
+        "unblocked",
+        "arcade",
+        "brick",
+        "paddle",
+        "retro"
+      ],
+      "tips": [
+        "Aim with the paddle edges: edge hits create sharp angles that clear corners fast.",
+        "Tunnel through one column to get the ball bouncing behind the wall for massive combos.",
+        "When only a few bricks remain, keep the paddle near center and react to the ball, not the bricks."
+      ],
+      "title": "Breakout"
+    },
+    {
+      "category": "puzzle",
+      "controls": "Desktop: click cards with the mouse. Mobile: tap cards. That's it — no keyboard needed.",
+      "description": "Memory Match is the classic concentration card game, rebuilt for the browser. Sixteen cards lie face down — flip two at a time and try to find all eight matching pairs. It sounds easy until the mismatches start piling up. A perfect game for sharpening focus, and a great quick break that actually exercises your brain.",
+      "emoji": "🃏",
+      "faq": [
+        {
+          "a": "You earn points for each matched pair, with bonuses for finishing in fewer moves and less time. Efficient play — remembering positions instead of guessing — gives the highest scores.",
+          "q": "How is Memory Match scored?"
+        },
+        {
+          "a": "It's a classic short-term memory exercise. Tracking card positions trains concentration and recall — and it's a lot more fun than flashcards.",
+          "q": "Is Memory Match good for your brain?"
+        },
+        {
+          "a": "Yes, completely free and unblocked on PlayBoba. No download, no account — just flip cards.",
+          "q": "Is Memory Match free and unblocked?"
+        },
+        {
+          "a": "Yes. The game is fully touch-friendly — just tap the cards to flip them.",
+          "q": "Can I play Memory Match on my phone?"
+        }
+      ],
+      "how_to_play": "Click (or tap) any card to flip it over, then flip a second card. If the two cards match, they stay face up and you score. If they don't match, they flip back over after a short moment — so pay attention, because remembering where you saw each symbol is the entire game. Clear all eight pairs to win.\n\nYour score rewards efficiency: fewer moves and less time mean a higher score. Every flip counts, so random guessing is expensive. The winning approach is systematic — flip cards in a pattern (say, left to right, top to bottom) so you always know which positions you've already seen. When you uncover a card, make a mental note of both its symbol and its position.\n\nAs pairs get cleared, the board empties and the remaining cards become easier to track — the hardest part is the opening, when everything is unknown. Try to memorize in chunks: focus on one row at a time rather than the whole board. With practice you'll find yourself clearing the board in fewer and fewer moves. It's a genuine workout for short-term memory, disguised as a relaxing game.",
+      "js": "memory.js",
+      "slug": "memory-match",
+      "tags": [
+        "unblocked",
+        "puzzle",
+        "memory",
+        "cards",
+        "brain"
+      ],
+      "tips": [
+        "Flip cards in a fixed pattern (row by row) so you always know what's been revealed.",
+        "When you see a card, memorize its position, not just its symbol.",
+        "Clear known pairs immediately when you flip their match — don't flip extra cards in between."
+      ],
+      "title": "Memory Match"
+    },
+    {
+      "category": "classic",
+      "controls": "Desktop: click a square with the mouse. Mobile: tap a square. Press restart to play again.",
+      "description": "Tic-Tac-Toe — the timeless game of X's and O's — against a computer opponent that actually thinks. Place your X's on the 3x3 grid and try to get three in a row before the AI does. It looks simple, but the AI blocks, sets traps, and punishes every careless move. Can you outsmart it, or will you settle for the honorable draw?",
+      "emoji": "⭕",
+      "faq": [
+        {
+          "a": "It's tough — the AI blocks threats and plays strong openings. Perfect play from both sides always draws, so your goal is to play flawlessly and never give the AI an opening. One mistake and it pounces.",
+          "q": "Can you actually beat the AI in Tic-Tac-Toe?"
+        },
+        {
+          "a": "The center. It participates in four winning lines (two diagonals, one row, one column) — more than any other square. If the center is taken, a corner is the next best.",
+          "q": "What is the best first move in Tic-Tac-Toe?"
+        },
+        {
+          "a": "Yes — free, unblocked, instant play in your browser. No download or sign-up.",
+          "q": "Is Tic-Tac-Toe free and unblocked on PlayBoba?"
+        },
+        {
+          "a": "This version is you versus the AI. For two humans, take turns on the same screen — X taps, then O taps — and keep score yourselves.",
+          "q": "Can two people play on the same device?"
+        }
+      ],
+      "how_to_play": "You play as X and move first; the AI plays O. Click (or tap) any empty square to place your mark, then the AI answers. Get three of your marks in a row — horizontally, vertically, or diagonally — to win. If all nine squares fill with no winner, it's a draw.\n\nAgainst perfect play, Tic-Tac-Toe always ends in a draw — which means your real opponent here is your own mistakes. The fundamentals: take the center square on your first move (it participates in four winning lines, more than any corner or edge). If the AI takes the center, take a corner instead. Always block the AI's immediate threats, but watch for forks — situations where the AI creates two winning threats at once and you can only block one.\n\nOur AI plays a strong game: it takes wins when it sees them, blocks your threats, and prefers center and corners like any good player. Beating it requires flawless play — one missed block and it's over. Most games between careful players end in draws, and there's no shame in that: forcing a draw against a strong AI means you played perfectly. Track your record across rounds and see if you can string together an unbeaten streak.",
+      "js": "tictactoe.js",
+      "slug": "tic-tac-toe",
+      "tags": [
+        "unblocked",
+        "classic",
+        "strategy",
+        "ai",
+        "2-player"
+      ],
+      "tips": [
+        "Open in the center — it gives you the most ways to win.",
+        "Always block the AI's two-in-a-row before building your own attack.",
+        "Watch for forks: if the AI threatens two lines at once, the game is lost — don't let it set one up."
+      ],
+      "title": "Tic-Tac-Toe"
+    },
+    {
+      "slug": "crumb-trail",
+      "title": "Crumb Trail",
+      "category": "puzzle",
+      "emoji": "🐜",
+      "description": "Crumb Trail is a cozy color-sorting puzzle game starring a hard-working ant colony with a serious boba milk tea obsession. Every level serves up a pixel-art treat — a boba cup, a strawberry, a full milk tea feast — built from tiny colored blocks. Tap the color boxes in your tray to release same-colored ants, then watch them march out, nibble the picture from the outside in, and haul every crumb home. Part puzzle, part ant farm, and weirdly relaxing to watch.",
+      "how_to_play": "Your nest has 5 slots, and your tray holds an ordered queue of color boxes. Tap one of the glowing boxes at the front of the tray to deploy its ants into a free slot — each box carries 1 to 3 ants, and more ants means faster munching. Deployed ants automatically bite one exposed block of their own color every tick.\n\nA block is exposed when it sits on the picture's outer edge or touches a block that's already been eaten, so the picture is always nibbled from the outside in. Here's the catch: a slot stays occupied until every last block of its color is gone. Deploy a color whose blocks are still buried and its ants will sit idle, clogging a precious slot. If all 5 slots clog while the tray still holds boxes — or the tray runs dry with blocks left on the board — the colony stalls and the level fails.\n\nSome blocks are extra chewy and need two bites; the number on the block shows bites remaining. Read the tray, deploy the outer colors first, and keep at least one slot breathing. There's no timer, so plan your deploy order like the ant general you are. Clear every block to win the level.",
+      "controls": "Mouse: click a glowing tray box to deploy its ants. Touch: tap a glowing tray box. The ants march and munch on their own. Use the Levels button in the game header to switch levels anytime.",
+      "tips": [
+        "Deploy the outermost color first — ants can only reach blocks on the picture's edge or next to cleared space.",
+        "Never deploy a buried color early: its ants idle and the slot stays clogged until surrounding colors are cleared.",
+        "Keep one slot free as a safety valve. Five clogged slots with boxes left in the tray means failure."
+      ],
+      "faq": [
+        {
+          "q": "How do the ants decide what to eat?",
+          "a": "Each deployed ant automatically bites one exposed block of its own color every tick, picking the topmost-leftmost one first. A block is exposed when it's on the picture's outer edge or touches an already-eaten block, so eating always works from the outside in. You control which colors deploy and when — the ants handle the munching."
+        },
+        {
+          "q": "What happens if I deploy the wrong color?",
+          "a": "Its ants sit idle and the slot stays occupied until that color's blocks become exposed. One clogged slot is usually recoverable — clear the outer colors and it frees up. But if all 5 slots clog while the tray still has boxes, the colony stalls and you fail. Hit retry and plan a better order."
+        },
+        {
+          "q": "Do I have to take the tray boxes in order?",
+          "a": "Not strictly — you can tap any of the glowing boxes at the front of the tray, and the queue advances behind them. Reading the upcoming order and choosing which front box to release is the core skill of the game."
+        },
+        {
+          "q": "Is Crumb Trail free to play?",
+          "a": "Yes — free and unblocked, right in your browser with no download and no account. Your completed levels are saved on your device, so you can pick up where you left off."
+        }
+      ],
+      "js": "crumb-trail.js",
+      "js_extra": [
+        "crumb-trail-levels.js",
+        "crumb-trail-core.js"
+      ],
+      "tags": [
+        "unblocked",
+        "puzzle",
+        "ants",
+        "color-sort",
+        "brain",
+        "sorting"
+      ]
+    },
+    {
+      "slug": "boba-garden",
+      "title": "Boba Garden",
+      "category": "puzzle",
+      "emoji": "🧋",
+      "description": "Boba Garden is a cozy idle farming game you can play free in your browser — no download, no sign-up, no account. If you enjoy the plant-grow-harvest loop of games like Grow a Garden, you'll feel right at home: buy seeds, tap plots to plant them, and watch your crops grow in real time, from tiny sprouts to golden, ready-to-harvest plants. Your garden keeps working even while you're away — come back to a field full of ripe crops and a pile of coins waiting to be collected. Everything here is original: the boba-milk-tea themed crops, the hand-drawn field art, and the numbers behind the economy were all made for this game.",
+      "how_to_play": "You start with a 3x3 field and 60 coins. Tap a seed in the shop bar to select it, then tap any empty plot to plant — your first tea seed takes seconds, so you'll be farming within half a minute. Each crop grows in real time through three stages: seed, sprout, and mature. A golden glow means it's ready: tap a mature crop to harvest it and the coins land in your pocket instantly.\n\nThere are three crops to master. Tea Leaves are cheap and fast — perfect for quick cash early on. Taro takes longer but pays better per harvest. Boba Pearls are the slow, expensive endgame crop with the best profit per minute. The shop shows each seed's approximate profit per minute, so you can plan like a real farm manager: spam fast crops for quick coins, or invest in slow crops before you log off.\n\nSpend your earnings on two things: more seeds, and a bigger field. Expanding from 3x3 to 4x4 and finally 5x5 multiplies how much you can grow at once, and it's the fastest way to scale your income. There is no timer and no way to lose — the strategy is all about which crops you plant and when.\n\nClose the tab whenever you like: crops keep growing while you're away (up to 12 hours), and anything that ripened is automatically harvested and sold, so every return starts with a satisfying payout screen. Your garden is saved in your browser automatically.",
+      "controls": "Mouse: click an empty plot to plant the selected seed; click a glowing mature crop to harvest. Touch: tap plots the same way — the game is built mobile-first. Use the seed bar under the field to switch crops, and the Expand button to grow your field when you can afford it.",
+      "tips": [
+        "Plant Tea Leaves first: they're cheap and mature in 30 seconds, giving you fast coins to reinvest.",
+        "Check the profit-per-minute figure in the shop — Boba Pearls win over time, but only if you can afford to wait 8 minutes.",
+        "Expand your field as soon as you can: more plots beats fancier crops in the early game.",
+        "Before logging off, fill every plot with slow crops like Boba Pearls so offline time earns the most.",
+        "A golden glowing plot is ready — harvest promptly to free the plot for the next planting."
+      ],
+      "faq": [
+        {
+          "q": "Is Boba Garden the same game as Grow a Garden?",
+          "a": "No. Boba Garden is an original game inspired by the farming idle genre that games like Grow a Garden popularized — plant seeds, watch them grow in real time, harvest and sell for coins. All of the art, crops, numbers and code here were made from scratch for this page, with a boba milk tea theme. If you're looking for a free grow a garden game online that runs right in your browser with no download, this plays the way you'd expect."
+        },
+        {
+          "q": "Do my crops keep growing when I close the page?",
+          "a": "Yes. Your garden keeps growing for up to 12 hours while you're away, and any crop that ripens in that time is automatically harvested and sold. When you come back you'll see a welcome-back screen telling you exactly how much you earned offline. Your progress is saved in your browser automatically."
+        },
+        {
+          "q": "Which crop makes the most money?",
+          "a": "Per minute of growing time, Boba Pearls earn the most — but each seed is expensive and takes 8 minutes to mature. Tea Leaves earn less per minute but mature in 30 seconds, so they're the best way to build your first few hundred coins. A good rhythm is: fast crops while you're actively playing, slow crops in every plot before you log off."
+        },
+        {
+          "q": "Is Boba Garden free? Do I need an account or download?",
+          "a": "Completely free, no account, no download — it runs entirely in your browser, on desktop and mobile. Your garden is stored locally in your own browser via local storage, so there's nothing to sign up for and nothing to install. If you clear your browser data, though, your save goes with it."
+        }
+      ],
+      "js": "boba-garden.js",
+      "js_extra": [
+        "boba-garden-core.js"
+      ],
+      "tags": [
+        "farming",
+        "idle",
+        "garden",
+        "cozy",
+        "unblocked",
+        "simulation",
+        "clicker"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "body_html": "<p><strong>PlayBoba</strong> is a free online game portal serving up fresh mini-games with a side of boba milk tea vibes. Every game on this site plays instantly in your browser — no downloads, no installs, no accounts, no nonsense.</p><p>We started PlayBoba with a simple belief: great games don't need to be complicated. The classics we grew up with — Snake, Breakout, 2048, Tic-Tac-Toe — are still some of the most fun you can have in five minutes. So we rebuilt them from scratch as lightweight, mobile-friendly web games and put them all in one cozy little corner of the internet.</p><p>Everything here is <strong>unblocked-friendly</strong>: the games are plain HTML and JavaScript with no shady plugins, so they run anywhere a modern browser runs — at school, at work (we won't tell), or on the couch. New games are added regularly, and every game page includes how-to-play guides and tips so you can actually get good, not just button-mash.</p><p>PlayBoba is free forever and supported by ads. Grab a boba, pick a game, and play. 🧋</p>",
+      "body_title": "About PlayBoba 🧋",
+      "description": "Learn what PlayBoba is: a free, unblocked mini-game portal you can play right in your browser.",
+      "slug": "about",
+      "title": "About PlayBoba"
+    },
+    {
+      "body_html": "<p><em>Last updated: October 2026</em></p><p>PlayBoba (&quot;we&quot;) respects your privacy. This policy explains what information we collect when you visit playboba.com and how we use it.</p><h2>What we collect</h2><p>We collect very little. Our games run entirely in your browser — your scores and game progress never leave your device. We do not require accounts, and we do not ask for your name, email, or any personal details to play.</p><h2>Analytics</h2><p>We may use privacy-friendly analytics to understand aggregate traffic (for example, which games are popular). This data is anonymized and never tied to an individual.</p><h2>Advertising</h2><p>PlayBoba is supported by advertising. Our ad partners may use cookies to show you relevant ads and measure their performance. You can control cookies through your browser settings, and you can opt out of personalized advertising via your ad provider's settings or at <a href=\"https://www.youronlinechoices.com/\" rel=\"nofollow\">youronlinechoices.com</a>.</p><h2>Children</h2><p>Our games are family-friendly, but the site is intended for a general audience. We do not knowingly collect personal information from children under 13.</p><h2>Contact</h2><p>Questions about this policy? Reach us via the <a href=\"/contact/\">contact page</a>.</p>",
+      "body_title": "Privacy Policy",
+      "description": "PlayBoba privacy policy: what data we collect (very little) and how advertising cookies work.",
+      "slug": "privacy-policy",
+      "title": "Privacy Policy"
+    },
+    {
+      "body_html": "<p><em>Last updated: October 2026</em></p><p>By using playboba.com you agree to these terms. They're short, we promise.</p><h2>Free personal use</h2><p>All games on PlayBoba are free for personal, non-commercial use. You may play them in your browser as much as you like. Please don't scrape, copy, or re-host our games or site content without permission.</p><h2>No warranties</h2><p>Games are provided &quot;as is&quot;. We do our best to keep everything running smoothly, but we can't guarantee the site will be error-free or uninterrupted.</p><h2>Fair play</h2><p>Don't attempt to disrupt the site or other players' experience — no hacking, no bots hammering our pages. Play fair and have fun.</p><h2>External links</h2><p>We may link to third-party sites (for example, advertisers). We're not responsible for their content or privacy practices.</p><h2>Changes</h2><p>We may update these terms from time to time. Continued use of the site after changes means you accept the new terms.</p><h2>Contact</h2><p>Questions? Use the <a href=\"/contact/\">contact page</a>.</p>",
+      "body_title": "Terms of Service",
+      "description": "PlayBoba terms of service: the simple rules for using our free online games.",
+      "slug": "terms-of-service",
+      "title": "Terms of Service"
+    },
+    {
+      "body_html": "<p>Have a game request? Found a bug? Just want to say hi? We'd love to hear from you.</p><p>The fastest way to reach the PlayBoba team is by email: <strong>hello@playboba.com</strong></p><h2>What to include</h2><ul><li><strong>Bug reports:</strong> which game, what device and browser you're using, and what happened.</li><li><strong>Game requests:</strong> tell us the game and why you'd love to see it on PlayBoba.</li><li><strong>Business inquiries:</strong> advertising and partnership proposals are welcome.</li></ul><p>We read every message and do our best to reply within a few days. Thanks for playing! 🧋</p>",
+      "body_title": "Contact Us 📬",
+      "description": "Contact the PlayBoba team: game requests, bug reports, feedback, and business inquiries.",
+      "slug": "contact",
+      "title": "Contact Us"
+    }
+  ],
+  "site": {
+    "description": "PlayBoba is a free online game portal. Play unblocked mini-games like 2048, Snake, Breakout, Memory Match and Tic-Tac-Toe right in your browser — no downloads, no sign-up.",
+    "domain": "playboba.com",
+    "name": "PlayBoba",
+    "tagline": "Free Online Games",
+    "base_path": "/playboba"
+  }
+}
